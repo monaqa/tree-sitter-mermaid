@@ -136,6 +136,16 @@
     }
   },
   {
+    "type": "note_placement_left",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "note_placement_right",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "signal",
     "named": true,
     "fields": {},
@@ -291,6 +301,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "stmt_autonumber",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "stmt_deactivate",
@@ -602,6 +617,10 @@
     "named": false
   },
   {
+    "type": "autonumber",
+    "named": false
+  },
+  {
     "type": "deactivate",
     "named": false
   },
@@ -634,6 +653,10 @@
     "named": false
   },
   {
+    "type": "left of",
+    "named": false
+  },
+  {
     "type": "link",
     "named": false
   },
@@ -648,14 +671,6 @@
   {
     "type": "note",
     "named": false
-  },
-  {
-    "type": "note_placement_left",
-    "named": true
-  },
-  {
-    "type": "note_placement_right",
-    "named": true
   },
   {
     "type": "opt",
@@ -679,6 +694,10 @@
   },
   {
     "type": "rect",
+    "named": false
+  },
+  {
+    "type": "right of",
     "named": false
   },
   {
@@ -707,10 +726,6 @@
   },
   {
     "type": "solid_point",
-    "named": true
-  },
-  {
-    "type": "stmt_autonumber",
     "named": true
   },
   {

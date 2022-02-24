@@ -20,8 +20,21 @@ const tokens = {
     dotted_point: "--)",
     signal_plus_sign: "+",
     signal_minus_sign: "-",
-    note_placement_left: "left of",
-    note_placement_right: "right of",
+    note_placement_left: kwd("left of"),
+    note_placement_right: kwd("right of"),
+}
+function kwd(word) {
+    return alias(reserved(caseInsensitive(word)), word)
+}
+
+function reserved(regex) {
+    return token(prec(1, new RegExp(regex)))
+}
+
+function caseInsensitive(word) {
+    return word.split('')
+        .map(letter => `[${letter}${letter.toUpperCase()}]`)
+        .join('')
 }
 
 const tokensFunc = Object.fromEntries(
@@ -50,8 +63,8 @@ module.exports = grammar({
         source_file: $ => $.diagram_sequence,
 
         diagram_sequence: $ => seq(
-            repeat($.directive),
-            "sequenceDiagram", repeat(choice($._diagram_stmt, $._newline))
+            repeat(choice($.directive, $._newline)),
+            kwd("sequenceDiagram"), repeat(choice($._diagram_stmt, $._newline))
         ),
 
         _diagram_stmt: $ => choice(
@@ -83,10 +96,10 @@ module.exports = grammar({
         ),
 
         stmt_participant: $ => seq(
-            "participant", $.actor, optional(seq("as", alias($._rest_text, $.alias))),
+            kwd("participant"), $.actor, optional(seq(kwd("as"), alias($._rest_text, $.alias))),
             $._newline,
         ),
-        stmt_actor: $ => seq("actor", $.actor, optional(seq("as", alias($._rest_text, $.alias))), $._newline),
+        stmt_actor: $ => seq(kwd("actor"), $.actor, optional(seq(kwd("as"), alias($._rest_text, $.alias))), $._newline),
         actor: $ => repeat1($._actor_word),
 
         signal: $ => seq(
@@ -108,56 +121,56 @@ module.exports = grammar({
             $.dotted_point,
         ),
 
-        stmt_autonumber: _ => "autonumber",
-        stmt_activate: $ => seq("activate", $.actor, $._newline),
-        stmt_deactivate: $ => seq("deactivate", $.actor, $._newline),
+        stmt_autonumber: _ => kwd("autonumber"),
+        stmt_activate: $ => seq(kwd("activate"), $.actor, $._newline),
+        stmt_deactivate: $ => seq(kwd("deactivate"), $.actor, $._newline),
 
         stmt_note: $ => seq(
-            "note",
+            kwd("note"),
             choice(
                 seq( $.note_placement, $.actor),
-                seq( "over", $.actor, optional(seq(",", $.actor))),
+                seq( kwd("over"), $.actor, optional(seq(",", $.actor))),
             ),
             ":", alias($._rest_text, $.text),
             $._newline,
         ),
 
-        stmt_links: $ => seq( "links", $.actor, ":", alias($._rest_text, $.text)),
-        stmt_link: $ => seq( "link", $.actor, ":", alias($._rest_text, $.text)),
-        stmt_properties: $ => seq( "properties", $.actor, ":", alias($._rest_text, $.text)),
-        stmt_details: $ => seq( "details", $.actor, ":", alias($._rest_text, $.text)),
+        stmt_links: $ => seq( kwd("links"), $.actor, ":", alias($._rest_text, $.text)),
+        stmt_link: $ => seq( kwd("link"), $.actor, ":", alias($._rest_text, $.text)),
+        stmt_properties: $ => seq( kwd("properties"), $.actor, ":", alias($._rest_text, $.text)),
+        stmt_details: $ => seq( kwd("details"), $.actor, ":", alias($._rest_text, $.text)),
 
         note_placement: $ => choice($.note_placement_left, $.note_placement_right),
 
-        stmt_title: $ => seq("title", ":", alias($._rest_text, $.title), $._newline),
+        stmt_title: $ => seq(kwd("title"), ":", alias($._rest_text, $.title), $._newline),
 
         stmt_loop: $ => seq(
-            "loop", alias($._rest_text, $.text), $._newline,
+            kwd("loop"), alias($._rest_text, $.text), $._newline,
             optional(alias($._subdocument, $.stmt_loop_inner)),
-            "end"
+            kwd("end")
         ),
         stmt_rect: $ => seq(
-            "rect", alias($._rest_text, $.text), $._newline,
+            kwd("rect"), alias($._rest_text, $.text), $._newline,
             optional(alias($._subdocument, $.stmt_rect_inner)),
-            "end"
+            kwd("end")
         ),
         stmt_opt: $ => seq(
-            "opt", alias($._rest_text, $.text), $._newline,
+            kwd("opt"), alias($._rest_text, $.text), $._newline,
             optional(alias($._subdocument, $.stmt_opt_inner)),
-            "end"
+            kwd("end")
         ),
         _subdocument: $ => repeat1(choice($._diagram_stmt, $._newline)),
 
         stmt_alt: $ => seq(
-            "alt", alias($._rest_text, $.text), $._newline,
-            sep(alias($._subdocument, $.stmt_alt_branch), "else"),
-            "end"
+            kwd("alt"), alias($._rest_text, $.text), $._newline,
+            sep(alias($._subdocument, $.stmt_alt_branch), kwd("else")),
+            kwd("end")
         ),
 
         stmt_par: $ => seq(
-            "par", alias($._rest_text, $.text), $._newline,
-            sep(alias($._subdocument, $.stmt_alt_branch), "and"),
-            "end"
+            kwd("par"), alias($._rest_text, $.text), $._newline,
+            sep(alias($._subdocument, $.stmt_alt_branch), kwd("and")),
+            kwd("end")
         ),
 
         ... tokensFunc
