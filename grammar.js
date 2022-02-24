@@ -63,15 +63,15 @@ module.exports = grammar({
             $.stmt_deactivate,
             $.stmt_note,
             $.stmt_links,
-            // $.stmt_link,
-            // $.stmt_properties,
-            // $.stmt_details,
+            $.stmt_link,
+            $.stmt_properties,
+            $.stmt_details,
             $.stmt_title,
             $.stmt_loop,
             $.stmt_rect,
             $.stmt_opt,
-            // $.stmt_alt,
-            // $.stmt_par,
+            $.stmt_alt,
+            $.stmt_par,
             $.directive,
         ),
 
@@ -148,6 +148,17 @@ module.exports = grammar({
         ),
         _subdocument: $ => repeat1(choice($._diagram_stmt, $._newline)),
 
+        stmt_alt: $ => seq(
+            "alt", alias($._rest_text, $.text), $._newline,
+            sep(alias($._subdocument, $.stmt_alt_branch), "else"),
+            "end"
+        ),
+
+        stmt_par: $ => seq(
+            "par", alias($._rest_text, $.text), $._newline,
+            sep(alias($._subdocument, $.stmt_alt_branch), "and"),
+            "end"
+        ),
 
         ... tokensFunc
     }

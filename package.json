@@ -16,5 +16,10 @@
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.4"
-  }
+  },
+  "tree-sitter": [{
+    "scope": "source.mermaid",
+    "file-types": ["mmd"],
+    "injection-regex": "mermaid|mmd"
+  }]
 }

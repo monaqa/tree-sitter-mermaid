@@ -74,6 +74,18 @@
         },
         {
           "type": "SYMBOL",
+          "name": "stmt_link"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "stmt_properties"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "stmt_details"
+        },
+        {
+          "type": "SYMBOL",
           "name": "stmt_title"
         },
         {
@@ -87,6 +99,14 @@
         {
           "type": "SYMBOL",
           "name": "stmt_opt"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "stmt_alt"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "stmt_par"
         },
         {
           "type": "SYMBOL",
@@ -720,6 +740,128 @@
           }
         ]
       }
+    },
+    "stmt_alt": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "alt"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_rest_text"
+          },
+          "named": true,
+          "value": "text"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_subdocument"
+              },
+              "named": true,
+              "value": "stmt_alt_branch"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "else"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_subdocument"
+                    },
+                    "named": true,
+                    "value": "stmt_alt_branch"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "end"
+        }
+      ]
+    },
+    "stmt_par": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "par"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_rest_text"
+          },
+          "named": true,
+          "value": "text"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_subdocument"
+              },
+              "named": true,
+              "value": "stmt_alt_branch"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "and"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_subdocument"
+                    },
+                    "named": true,
+                    "value": "stmt_alt_branch"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "end"
+        }
+      ]
     },
     "_whitespace": {
       "type": "PATTERN",

@@ -20,11 +20,23 @@
         "named": true
       },
       {
+        "type": "stmt_alt",
+        "named": true
+      },
+      {
         "type": "stmt_autonumber",
         "named": true
       },
       {
         "type": "stmt_deactivate",
+        "named": true
+      },
+      {
+        "type": "stmt_details",
+        "named": true
+      },
+      {
+        "type": "stmt_link",
         "named": true
       },
       {
@@ -44,7 +56,15 @@
         "named": true
       },
       {
+        "type": "stmt_par",
+        "named": true
+      },
+      {
         "type": "stmt_participant",
+        "named": true
+      },
+      {
+        "type": "stmt_properties",
         "named": true
       },
       {
@@ -239,6 +259,40 @@
     }
   },
   {
+    "type": "stmt_alt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "stmt_alt_branch",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stmt_alt_branch",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_diagram_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "stmt_deactivate",
     "named": true,
     "fields": {},
@@ -248,6 +302,44 @@
       "types": [
         {
           "type": "actor",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stmt_details",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stmt_link",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         }
       ]
@@ -364,6 +456,25 @@
     }
   },
   {
+    "type": "stmt_par",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "stmt_alt_branch",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "stmt_participant",
     "named": true,
     "fields": {},
@@ -377,6 +488,25 @@
         },
         {
           "type": "alias",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stmt_properties",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        },
+        {
+          "type": "text",
           "named": true
         }
       ]
@@ -456,6 +586,14 @@
     "named": true
   },
   {
+    "type": "alt",
+    "named": false
+  },
+  {
+    "type": "and",
+    "named": false
+  },
+  {
     "type": "arg_directive",
     "named": true
   },
@@ -486,6 +624,10 @@
   {
     "type": "dotted_point",
     "named": true
+  },
+  {
+    "type": "else",
+    "named": false
   },
   {
     "type": "end",
@@ -521,6 +663,10 @@
   },
   {
     "type": "over",
+    "named": false
+  },
+  {
+    "type": "par",
     "named": false
   },
   {
