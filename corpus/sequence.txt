@@ -1,0 +1,256 @@
+==========================
+Simple sequence diagram
+==========================
+sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+    Alice-)John: See you later!
+
+---
+
+(source_file
+  (diagram_sequence
+    (signal
+      (actor)
+      (signal_type
+        (solid_arrow))
+      (actor)
+      (text))
+    (signal
+      (actor)
+      (signal_type
+        (dotted_arrow))
+      (actor)
+      (text))
+    (signal
+      (actor)
+      (signal_type
+        (solid_point))
+      (actor)
+      (text))))
+
+==========================
+Participant statement
+==========================
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>Bob: Hi Bob
+    Bob->>Alice: Hi Alice
+
+---
+
+(source_file
+  (diagram_sequence
+    (stmt_participant
+      (actor))
+    (stmt_participant
+      (actor))
+    (signal
+      (actor)
+      (signal_type
+        (solid_arrow))
+      (actor)
+      (text))
+    (signal
+      (actor)
+      (signal_type
+        (solid_arrow))
+      (actor)
+      (text))))
+
+==========================
+Actor statement
+==========================
+sequenceDiagram
+    actor Alice
+    actor Bob
+    Alice->>Bob: Hi Bob
+    Bob->>Alice: Hi Alice
+
+---
+
+(source_file
+  (diagram_sequence
+    (stmt_actor
+      (actor))
+    (stmt_actor
+      (actor))
+    (signal
+      (actor)
+      (signal_type
+        (solid_arrow))
+      (actor)
+      (text))
+    (signal
+      (actor)
+      (signal_type
+        (solid_arrow))
+      (actor)
+      (text))))
+
+==========================
+Participant with alias
+==========================
+sequenceDiagram
+    participant A as Alice
+    participant J as John
+    A->>J: Hello John, how are you?
+    J->>A: Great!
+
+---
+
+(source_file
+  (diagram_sequence
+    (stmt_participant
+      (actor)
+      (alias))
+    (stmt_participant
+      (actor)
+      (alias))
+    (signal
+      (actor)
+      (signal_type
+        (solid_arrow))
+      (actor)
+      (text))
+    (signal
+      (actor)
+      (signal_type
+        (solid_arrow))
+      (actor)
+      (text))))
+
+==========================
+Activation statement
+==========================
+sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    activate John
+    John-->>Alice: Great!
+    deactivate John
+
+---
+
+(source_file
+  (diagram_sequence
+    (signal
+      (actor)
+      (signal_type
+        (solid_arrow))
+      (actor)
+      (text))
+    (stmt_activate
+      (actor))
+    (signal
+      (actor)
+      (signal_type
+        (dotted_arrow))
+      (actor)
+      (text))
+    (stmt_deactivate
+      (actor))))
+
+==================================
+Activation statement with sign
+==================================
+sequenceDiagram
+    Alice->>+John: Hello John, how are you?
+    Alice->>+John: John, can you hear me?
+    John-->>-Alice: Hi Alice, I can hear you!
+    John-->>-Alice: I feel great!
+
+---
+
+(source_file
+  (diagram_sequence
+    (signal
+      (actor)
+      (signal_type
+        (solid_arrow))
+      (signal_plus_sign)
+      (actor)
+      (text))
+    (signal
+      (actor)
+      (signal_type
+        (solid_arrow))
+      (signal_plus_sign)
+      (actor)
+      (text))
+    (signal
+      (actor)
+      (signal_type
+        (dotted_arrow))
+      (signal_minus_sign)
+      (actor)
+      (text))
+    (signal
+      (actor)
+      (signal_type
+        (dotted_arrow))
+      (signal_minus_sign)
+      (actor)
+      (text))))
+
+==================================
+Note statement (left/right of)
+==================================
+
+sequenceDiagram
+    participant John
+    note right of John: Text in note
+
+---
+
+(source_file
+  (diagram_sequence
+    (stmt_participant
+      (actor))
+    (stmt_note
+      (note_placement
+        (note_placement_right))
+      (actor)
+      (text))))
+
+==================================
+Note statement (over)
+==================================
+sequenceDiagram
+    Alice->John: Hello John, how are you?
+    note over Alice,John: A typical interaction
+
+---
+
+(source_file
+  (diagram_sequence
+    (signal
+      (actor)
+      (signal_type
+        (solid_open_arrow))
+      (actor)
+      (text))
+    (stmt_note
+      (actor)
+      (actor)
+      (text))))
+
+==================================
+Case insensitiveness
+==================================
+sequenceDiagram
+    autonumber
+    Autonumber
+    autoNumber
+    AutoNumber
+    AUTONUMBER
+
+---
+
+(source_file
+  (diagram_sequence
+    (stmt_autonumber)
+    (stmt_autonumber)
+    (stmt_autonumber)
+    (stmt_autonumber)
+    (stmt_autonumber)))
