@@ -22,6 +22,17 @@ const tokens = {
     signal_minus_sign: "-",
     note_placement_left: kwd("left of"),
     note_placement_right: kwd("right of"),
+
+    _alpha_num_token: /\S+/,
+    _bquote_string: /`[^`]+`/,
+    _dquote_string: /"[^"]+"/,
+
+    class_reltype_aggregation: "o",
+    class_reltype_extension: choice("<|", "|>"),
+    class_reltype_composition: "*",
+    class_reltype_dependency: choice("<", ">"),
+    class_linetype_solid: "--",
+    class_linetype_dotted: "..",
 }
 function kwd(word) {
     return alias(reserved(caseInsensitive(word)), word)
@@ -60,31 +71,44 @@ module.exports = grammar({
     ],
 
     rules: {
-        source_file: $ => $.diagram_sequence,
+        source_file: $ => choice(
+            $.diagram_sequence,
+            $.diagram_class,
+        ),
 
         diagram_sequence: $ => seq(
             repeat(choice($.directive, $._newline)),
             kwd("sequenceDiagram"), repeat(choice($._diagram_stmt, $._newline))
         ),
 
+        diagram_class: $ => seq(
+            repeat(choice($.directive, $._newline)),
+            choice(
+                kwd("classDiagram-v2"),
+                kwd("classDiagram"),
+            ),
+            $._newline,
+            repeat(choice($._class_stmt, $._newline))
+        ),
+
         _diagram_stmt: $ => choice(
-            $.stmt_participant,
-            $.stmt_actor,
-            $.signal,
-            $.stmt_autonumber,
-            $.stmt_activate,
-            $.stmt_deactivate,
-            $.stmt_note,
-            $.stmt_links,
-            $.stmt_link,
-            $.stmt_properties,
-            $.stmt_details,
-            $.stmt_title,
-            $.stmt_loop,
-            $.stmt_rect,
-            $.stmt_opt,
-            $.stmt_alt,
-            $.stmt_par,
+            $.sequence_stmt_participant,
+            $.sequence_stmt_actor,
+            $.sequence_stmt_signal,
+            $.sequence_stmt_autonumber,
+            $.sequence_stmt_activate,
+            $.sequence_stmt_deactivate,
+            $.sequence_stmt_note,
+            $.sequence_stmt_links,
+            $.sequence_stmt_link,
+            $.sequence_stmt_properties,
+            $.sequence_stmt_details,
+            $.sequence_stmt_title,
+            $.sequence_stmt_loop,
+            $.sequence_stmt_rect,
+            $.sequence_stmt_opt,
+            $.sequence_stmt_alt,
+            $.sequence_stmt_par,
             $.directive,
         ),
 
@@ -95,14 +119,14 @@ module.exports = grammar({
             "}%%"
         ),
 
-        stmt_participant: $ => seq(
+        sequence_stmt_participant: $ => seq(
             kwd("participant"), $.actor, optional(seq(kwd("as"), alias($._rest_text, $.alias))),
             $._newline,
         ),
-        stmt_actor: $ => seq(kwd("actor"), $.actor, optional(seq(kwd("as"), alias($._rest_text, $.alias))), $._newline),
+        sequence_stmt_actor: $ => seq(kwd("actor"), $.actor, optional(seq(kwd("as"), alias($._rest_text, $.alias))), $._newline),
         actor: $ => repeat1($._actor_word),
 
-        signal: $ => seq(
+        sequence_stmt_signal: $ => seq(
             $.actor,
             $.signal_type,
             optional(choice($.signal_plus_sign, $.signal_minus_sign)),
@@ -121,11 +145,11 @@ module.exports = grammar({
             $.dotted_point,
         ),
 
-        stmt_autonumber: _ => kwd("autonumber"),
-        stmt_activate: $ => seq(kwd("activate"), $.actor, $._newline),
-        stmt_deactivate: $ => seq(kwd("deactivate"), $.actor, $._newline),
+        sequence_stmt_autonumber: _ => kwd("autonumber"),
+        sequence_stmt_activate: $ => seq(kwd("activate"), $.actor, $._newline),
+        sequence_stmt_deactivate: $ => seq(kwd("deactivate"), $.actor, $._newline),
 
-        stmt_note: $ => seq(
+        sequence_stmt_note: $ => seq(
             kwd("note"),
             choice(
                 seq( $.note_placement, $.actor),
@@ -135,42 +159,74 @@ module.exports = grammar({
             $._newline,
         ),
 
-        stmt_links: $ => seq( kwd("links"), $.actor, ":", alias($._rest_text, $.text)),
-        stmt_link: $ => seq( kwd("link"), $.actor, ":", alias($._rest_text, $.text)),
-        stmt_properties: $ => seq( kwd("properties"), $.actor, ":", alias($._rest_text, $.text)),
-        stmt_details: $ => seq( kwd("details"), $.actor, ":", alias($._rest_text, $.text)),
+        sequence_stmt_links: $ => seq( kwd("links"), $.actor, ":", alias($._rest_text, $.text)),
+        sequence_stmt_link: $ => seq( kwd("link"), $.actor, ":", alias($._rest_text, $.text)),
+        sequence_stmt_properties: $ => seq( kwd("properties"), $.actor, ":", alias($._rest_text, $.text)),
+        sequence_stmt_details: $ => seq( kwd("details"), $.actor, ":", alias($._rest_text, $.text)),
 
         note_placement: $ => choice($.note_placement_left, $.note_placement_right),
 
-        stmt_title: $ => seq(kwd("title"), ":", alias($._rest_text, $.title), $._newline),
+        sequence_stmt_title: $ => seq(kwd("title"), ":", alias($._rest_text, $.title), $._newline),
 
-        stmt_loop: $ => seq(
+        sequence_stmt_loop: $ => seq(
             kwd("loop"), alias($._rest_text, $.text), $._newline,
-            optional(alias($._subdocument, $.stmt_loop_inner)),
+            optional(alias($._subdocument, $.sequence_stmt_loop_inner)),
             kwd("end")
         ),
-        stmt_rect: $ => seq(
+        sequence_stmt_rect: $ => seq(
             kwd("rect"), alias($._rest_text, $.text), $._newline,
-            optional(alias($._subdocument, $.stmt_rect_inner)),
+            optional(alias($._subdocument, $.sequence_stmt_rect_inner)),
             kwd("end")
         ),
-        stmt_opt: $ => seq(
+        sequence_stmt_opt: $ => seq(
             kwd("opt"), alias($._rest_text, $.text), $._newline,
-            optional(alias($._subdocument, $.stmt_opt_inner)),
+            optional(alias($._subdocument, $.sequence_stmt_opt_inner)),
             kwd("end")
         ),
         _subdocument: $ => repeat1(choice($._diagram_stmt, $._newline)),
 
-        stmt_alt: $ => seq(
+        sequence_stmt_alt: $ => seq(
             kwd("alt"), alias($._rest_text, $.text), $._newline,
-            sep(alias($._subdocument, $.stmt_alt_branch), kwd("else")),
+            sep(alias($._subdocument, $.sequence_stmt_alt_branch), kwd("else")),
             kwd("end")
         ),
 
-        stmt_par: $ => seq(
+        sequence_stmt_par: $ => seq(
             kwd("par"), alias($._rest_text, $.text), $._newline,
-            sep(alias($._subdocument, $.stmt_alt_branch), kwd("and")),
+            sep(alias($._subdocument, $.sequence_stmt_alt_branch), kwd("and")),
             kwd("end")
+        ),
+
+
+        _class_stmt: $ => choice(
+            $.class_stmt_relation,
+        ),
+
+        class_stmt_relation: $ => seq(
+            $.class_name,
+            optional(alias($._dquote_string, $.cardinality)),
+            $.class_relation,
+            optional(alias($._dquote_string, $.cardinality)),
+            $.class_name,
+        ),
+        class_name: $ => choice(
+            $._alpha_num_token,
+            $._bquote_string,
+        ),
+        class_relation: $ => seq(
+            optional($._class_reltype),
+            $._class_linetype,
+            optional($._class_reltype),
+        ),
+        _class_reltype: $ => choice(
+            $.class_reltype_aggregation,
+            $.class_reltype_extension,
+            $.class_reltype_composition,
+            $.class_reltype_dependency,
+        ),
+        _class_linetype: $ => choice(
+            $.class_linetype_solid,
+            $.class_linetype_dotted,
         ),
 
         ... tokensFunc

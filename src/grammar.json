@@ -2,8 +2,17 @@
   "name": "mermaid",
   "rules": {
     "source_file": {
-      "type": "SYMBOL",
-      "name": "diagram_sequence"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "diagram_sequence"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "diagram_class"
+        }
+      ]
     },
     "diagram_sequence": {
       "type": "SEQ",
@@ -58,76 +67,154 @@
         }
       ]
     },
+    "diagram_class": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "directive"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[cC][lL][aA][sS][sS][DD][iI][aA][gG][rR][aA][mM][--][vV][22]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "classDiagram-v2"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[cC][lL][aA][sS][sS][DD][iI][aA][gG][rR][aA][mM]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "classDiagram"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_class_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
     "_diagram_stmt": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "stmt_participant"
+          "name": "sequence_stmt_participant"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_actor"
+          "name": "sequence_stmt_actor"
         },
         {
           "type": "SYMBOL",
-          "name": "signal"
+          "name": "sequence_stmt_signal"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_autonumber"
+          "name": "sequence_stmt_autonumber"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_activate"
+          "name": "sequence_stmt_activate"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_deactivate"
+          "name": "sequence_stmt_deactivate"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_note"
+          "name": "sequence_stmt_note"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_links"
+          "name": "sequence_stmt_links"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_link"
+          "name": "sequence_stmt_link"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_properties"
+          "name": "sequence_stmt_properties"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_details"
+          "name": "sequence_stmt_details"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_title"
+          "name": "sequence_stmt_title"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_loop"
+          "name": "sequence_stmt_loop"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_rect"
+          "name": "sequence_stmt_rect"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_opt"
+          "name": "sequence_stmt_opt"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_alt"
+          "name": "sequence_stmt_alt"
         },
         {
           "type": "SYMBOL",
-          "name": "stmt_par"
+          "name": "sequence_stmt_par"
         },
         {
           "type": "SYMBOL",
@@ -173,7 +260,7 @@
         }
       ]
     },
-    "stmt_participant": {
+    "sequence_stmt_participant": {
       "type": "SEQ",
       "members": [
         {
@@ -240,7 +327,7 @@
         }
       ]
     },
-    "stmt_actor": {
+    "sequence_stmt_actor": {
       "type": "SEQ",
       "members": [
         {
@@ -314,7 +401,7 @@
         "name": "_actor_word"
       }
     },
-    "signal": {
+    "sequence_stmt_signal": {
       "type": "SEQ",
       "members": [
         {
@@ -406,7 +493,7 @@
         }
       ]
     },
-    "stmt_autonumber": {
+    "sequence_stmt_autonumber": {
       "type": "ALIAS",
       "content": {
         "type": "TOKEN",
@@ -422,7 +509,7 @@
       "named": false,
       "value": "autonumber"
     },
-    "stmt_activate": {
+    "sequence_stmt_activate": {
       "type": "SEQ",
       "members": [
         {
@@ -451,7 +538,7 @@
         }
       ]
     },
-    "stmt_deactivate": {
+    "sequence_stmt_deactivate": {
       "type": "SEQ",
       "members": [
         {
@@ -480,7 +567,7 @@
         }
       ]
     },
-    "stmt_note": {
+    "sequence_stmt_note": {
       "type": "SEQ",
       "members": [
         {
@@ -582,7 +669,7 @@
         }
       ]
     },
-    "stmt_links": {
+    "sequence_stmt_links": {
       "type": "SEQ",
       "members": [
         {
@@ -620,7 +707,7 @@
         }
       ]
     },
-    "stmt_link": {
+    "sequence_stmt_link": {
       "type": "SEQ",
       "members": [
         {
@@ -658,7 +745,7 @@
         }
       ]
     },
-    "stmt_properties": {
+    "sequence_stmt_properties": {
       "type": "SEQ",
       "members": [
         {
@@ -696,7 +783,7 @@
         }
       ]
     },
-    "stmt_details": {
+    "sequence_stmt_details": {
       "type": "SEQ",
       "members": [
         {
@@ -747,7 +834,7 @@
         }
       ]
     },
-    "stmt_title": {
+    "sequence_stmt_title": {
       "type": "SEQ",
       "members": [
         {
@@ -785,7 +872,7 @@
         }
       ]
     },
-    "stmt_loop": {
+    "sequence_stmt_loop": {
       "type": "SEQ",
       "members": [
         {
@@ -827,7 +914,7 @@
                 "name": "_subdocument"
               },
               "named": true,
-              "value": "stmt_loop_inner"
+              "value": "sequence_stmt_loop_inner"
             },
             {
               "type": "BLANK"
@@ -852,7 +939,7 @@
         }
       ]
     },
-    "stmt_rect": {
+    "sequence_stmt_rect": {
       "type": "SEQ",
       "members": [
         {
@@ -894,7 +981,7 @@
                 "name": "_subdocument"
               },
               "named": true,
-              "value": "stmt_rect_inner"
+              "value": "sequence_stmt_rect_inner"
             },
             {
               "type": "BLANK"
@@ -919,7 +1006,7 @@
         }
       ]
     },
-    "stmt_opt": {
+    "sequence_stmt_opt": {
       "type": "SEQ",
       "members": [
         {
@@ -961,7 +1048,7 @@
                 "name": "_subdocument"
               },
               "named": true,
-              "value": "stmt_opt_inner"
+              "value": "sequence_stmt_opt_inner"
             },
             {
               "type": "BLANK"
@@ -1002,7 +1089,7 @@
         ]
       }
     },
-    "stmt_alt": {
+    "sequence_stmt_alt": {
       "type": "SEQ",
       "members": [
         {
@@ -1044,7 +1131,7 @@
                 "name": "_subdocument"
               },
               "named": true,
-              "value": "stmt_alt_branch"
+              "value": "sequence_stmt_alt_branch"
             },
             {
               "type": "REPEAT",
@@ -1074,7 +1161,7 @@
                       "name": "_subdocument"
                     },
                     "named": true,
-                    "value": "stmt_alt_branch"
+                    "value": "sequence_stmt_alt_branch"
                   }
                 ]
               }
@@ -1099,7 +1186,7 @@
         }
       ]
     },
-    "stmt_par": {
+    "sequence_stmt_par": {
       "type": "SEQ",
       "members": [
         {
@@ -1141,7 +1228,7 @@
                 "name": "_subdocument"
               },
               "named": true,
-              "value": "stmt_alt_branch"
+              "value": "sequence_stmt_alt_branch"
             },
             {
               "type": "REPEAT",
@@ -1171,7 +1258,7 @@
                       "name": "_subdocument"
                     },
                     "named": true,
-                    "value": "stmt_alt_branch"
+                    "value": "sequence_stmt_alt_branch"
                   }
                 ]
               }
@@ -1193,6 +1280,146 @@
           },
           "named": false,
           "value": "end"
+        }
+      ]
+    },
+    "_class_stmt": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "class_stmt_relation"
+        }
+      ]
+    },
+    "class_stmt_relation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "class_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_dquote_string"
+              },
+              "named": true,
+              "value": "cardinality"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "class_relation"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_dquote_string"
+              },
+              "named": true,
+              "value": "cardinality"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "class_name"
+        }
+      ]
+    },
+    "class_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_alpha_num_token"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_bquote_string"
+        }
+      ]
+    },
+    "class_relation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_class_reltype"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_class_linetype"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_class_reltype"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_class_reltype": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "class_reltype_aggregation"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "class_reltype_extension"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "class_reltype_composition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "class_reltype_dependency"
+        }
+      ]
+    },
+    "_class_linetype": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "class_linetype_solid"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "class_linetype_dotted"
         }
       ]
     },
@@ -1295,6 +1522,60 @@
       },
       "named": false,
       "value": "right of"
+    },
+    "_alpha_num_token": {
+      "type": "PATTERN",
+      "value": "\\S+"
+    },
+    "_bquote_string": {
+      "type": "PATTERN",
+      "value": "`[^`]+`"
+    },
+    "_dquote_string": {
+      "type": "PATTERN",
+      "value": "\"[^\"]+\""
+    },
+    "class_reltype_aggregation": {
+      "type": "STRING",
+      "value": "o"
+    },
+    "class_reltype_extension": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<|"
+        },
+        {
+          "type": "STRING",
+          "value": "|>"
+        }
+      ]
+    },
+    "class_reltype_composition": {
+      "type": "STRING",
+      "value": "*"
+    },
+    "class_reltype_dependency": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        }
+      ]
+    },
+    "class_linetype_solid": {
+      "type": "STRING",
+      "value": "--"
+    },
+    "class_linetype_dotted": {
+      "type": "STRING",
+      "value": ".."
     }
   },
   "extras": [
