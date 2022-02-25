@@ -67,7 +67,10 @@ module.exports = grammar({
     ],
 
     supertypes: $ => [
-        $._diagram_stmt,
+        $._sequence_stmt,
+        $._class_stmt,
+        $._class_reltype,
+        $._class_linetype,
     ],
 
     rules: {
@@ -78,7 +81,7 @@ module.exports = grammar({
 
         diagram_sequence: $ => seq(
             repeat(choice($.directive, $._newline)),
-            kwd("sequenceDiagram"), repeat(choice($._diagram_stmt, $._newline))
+            kwd("sequenceDiagram"), repeat(choice($._sequence_stmt, $._newline))
         ),
 
         diagram_class: $ => seq(
@@ -91,7 +94,7 @@ module.exports = grammar({
             repeat(choice($._class_stmt, $._newline))
         ),
 
-        _diagram_stmt: $ => choice(
+        _sequence_stmt: $ => choice(
             $.sequence_stmt_participant,
             $.sequence_stmt_actor,
             $.sequence_stmt_signal,
@@ -183,7 +186,7 @@ module.exports = grammar({
             optional(alias($._subdocument, $.sequence_stmt_opt_inner)),
             kwd("end")
         ),
-        _subdocument: $ => repeat1(choice($._diagram_stmt, $._newline)),
+        _subdocument: $ => repeat1(choice($._sequence_stmt, $._newline)),
 
         sequence_stmt_alt: $ => seq(
             kwd("alt"), alias($._rest_text, $.text), $._newline,

@@ -10,19 +10,19 @@ sequenceDiagram
 
 (source_file
   (diagram_sequence
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_arrow))
       (actor)
       (text))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (dotted_arrow))
       (actor)
       (text))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_point))
@@ -42,17 +42,17 @@ sequenceDiagram
 
 (source_file
   (diagram_sequence
-    (stmt_participant
+    (sequence_stmt_participant
       (actor))
-    (stmt_participant
+    (sequence_stmt_participant
       (actor))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_arrow))
       (actor)
       (text))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_arrow))
@@ -72,17 +72,17 @@ sequenceDiagram
 
 (source_file
   (diagram_sequence
-    (stmt_actor
+    (sequence_stmt_actor
       (actor))
-    (stmt_actor
+    (sequence_stmt_actor
       (actor))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_arrow))
       (actor)
       (text))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_arrow))
@@ -102,19 +102,19 @@ sequenceDiagram
 
 (source_file
   (diagram_sequence
-    (stmt_participant
+    (sequence_stmt_participant
       (actor)
       (alias))
-    (stmt_participant
+    (sequence_stmt_participant
       (actor)
       (alias))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_arrow))
       (actor)
       (text))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_arrow))
@@ -134,21 +134,21 @@ sequenceDiagram
 
 (source_file
   (diagram_sequence
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_arrow))
       (actor)
       (text))
-    (stmt_activate
+    (sequence_stmt_activate
       (actor))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (dotted_arrow))
       (actor)
       (text))
-    (stmt_deactivate
+    (sequence_stmt_deactivate
       (actor))))
 
 ==================================
@@ -164,28 +164,28 @@ sequenceDiagram
 
 (source_file
   (diagram_sequence
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_arrow))
       (signal_plus_sign)
       (actor)
       (text))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_arrow))
       (signal_plus_sign)
       (actor)
       (text))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (dotted_arrow))
       (signal_minus_sign)
       (actor)
       (text))
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (dotted_arrow))
@@ -205,9 +205,9 @@ sequenceDiagram
 
 (source_file
   (diagram_sequence
-    (stmt_participant
+    (sequence_stmt_participant
       (actor))
-    (stmt_note
+    (sequence_stmt_note
       (note_placement
         (note_placement_right))
       (actor)
@@ -224,13 +224,13 @@ sequenceDiagram
 
 (source_file
   (diagram_sequence
-    (signal
+    (sequence_stmt_signal
       (actor)
       (signal_type
         (solid_open_arrow))
       (actor)
       (text))
-    (stmt_note
+    (sequence_stmt_note
       (actor)
       (actor)
       (text))))
@@ -249,8 +249,8 @@ sequenceDiagram
 
 (source_file
   (diagram_sequence
-    (stmt_autonumber)
-    (stmt_autonumber)
-    (stmt_autonumber)
-    (stmt_autonumber)
-    (stmt_autonumber)))
+    (sequence_stmt_autonumber)
+    (sequence_stmt_autonumber)
+    (sequence_stmt_autonumber)
+    (sequence_stmt_autonumber)
+    (sequence_stmt_autonumber)))

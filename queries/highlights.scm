@@ -21,7 +21,7 @@
  "par"
  "and"
  "end"
- (stmt_autonumber)
+ (sequence_stmt_autonumber)
  (note_placement_left)
  (note_placement_right)
  ] @keyword
