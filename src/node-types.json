@@ -1,6 +1,64 @@
 [
   {
-    "type": "_diagram_stmt",
+    "type": "_class_linetype",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "class_linetype_dotted",
+        "named": true
+      },
+      {
+        "type": "class_linetype_solid",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_class_reltype",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "class_reltype_aggregation",
+        "named": true
+      },
+      {
+        "type": "class_reltype_composition",
+        "named": true
+      },
+      {
+        "type": "class_reltype_dependency",
+        "named": true
+      },
+      {
+        "type": "class_reltype_extension",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_class_stmt",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "class_stmt_annotation",
+        "named": true
+      },
+      {
+        "type": "class_stmt_class",
+        "named": true
+      },
+      {
+        "type": "class_stmt_method",
+        "named": true
+      },
+      {
+        "type": "class_stmt_relation",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_sequence_stmt",
     "named": true,
     "subtypes": [
       {
@@ -8,71 +66,71 @@
         "named": true
       },
       {
-        "type": "signal",
+        "type": "sequence_stmt_activate",
         "named": true
       },
       {
-        "type": "stmt_activate",
+        "type": "sequence_stmt_actor",
         "named": true
       },
       {
-        "type": "stmt_actor",
+        "type": "sequence_stmt_alt",
         "named": true
       },
       {
-        "type": "stmt_alt",
+        "type": "sequence_stmt_autonumber",
         "named": true
       },
       {
-        "type": "stmt_autonumber",
+        "type": "sequence_stmt_deactivate",
         "named": true
       },
       {
-        "type": "stmt_deactivate",
+        "type": "sequence_stmt_details",
         "named": true
       },
       {
-        "type": "stmt_details",
+        "type": "sequence_stmt_link",
         "named": true
       },
       {
-        "type": "stmt_link",
+        "type": "sequence_stmt_links",
         "named": true
       },
       {
-        "type": "stmt_links",
+        "type": "sequence_stmt_loop",
         "named": true
       },
       {
-        "type": "stmt_loop",
+        "type": "sequence_stmt_note",
         "named": true
       },
       {
-        "type": "stmt_note",
+        "type": "sequence_stmt_opt",
         "named": true
       },
       {
-        "type": "stmt_opt",
+        "type": "sequence_stmt_par",
         "named": true
       },
       {
-        "type": "stmt_par",
+        "type": "sequence_stmt_participant",
         "named": true
       },
       {
-        "type": "stmt_participant",
+        "type": "sequence_stmt_properties",
         "named": true
       },
       {
-        "type": "stmt_properties",
+        "type": "sequence_stmt_rect",
         "named": true
       },
       {
-        "type": "stmt_rect",
+        "type": "sequence_stmt_signal",
         "named": true
       },
       {
-        "type": "stmt_title",
+        "type": "sequence_stmt_title",
         "named": true
       }
     ]
@@ -83,6 +141,240 @@
     "fields": {}
   },
   {
+    "type": "class_annotation_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "class_generics",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "class_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "class_method_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "class_classifier_abstract",
+          "named": true
+        },
+        {
+          "type": "class_classifier_static",
+          "named": true
+        },
+        {
+          "type": "class_visibility_internal",
+          "named": true
+        },
+        {
+          "type": "class_visibility_private",
+          "named": true
+        },
+        {
+          "type": "class_visibility_protected",
+          "named": true
+        },
+        {
+          "type": "class_visibility_public",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "class_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "class_generics",
+          "named": true
+        },
+        {
+          "type": "class_name_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "class_name_body",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "class_relation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_class_linetype",
+          "named": true
+        },
+        {
+          "type": "_class_reltype",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "class_reltype_composition",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "class_reltype_dependency",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "class_reltype_extension",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "class_stmt_annotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "class_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "class_stmt_class",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "class_annotation_line",
+          "named": true
+        },
+        {
+          "type": "class_method_line",
+          "named": true
+        },
+        {
+          "type": "class_name",
+          "named": true
+        },
+        {
+          "type": "class_style_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "class_stmt_method",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "class_method_line",
+          "named": true
+        },
+        {
+          "type": "class_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "class_stmt_relation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cardinality",
+          "named": true
+        },
+        {
+          "type": "class_label",
+          "named": true
+        },
+        {
+          "type": "class_name",
+          "named": true
+        },
+        {
+          "type": "class_relation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_class",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_class_stmt",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "diagram_sequence",
     "named": true,
     "fields": {},
@@ -91,7 +383,7 @@
       "required": false,
       "types": [
         {
-          "type": "_diagram_stmt",
+          "type": "_sequence_stmt",
           "named": true
         }
       ]
@@ -146,7 +438,334 @@
     "fields": {}
   },
   {
-    "type": "signal",
+    "type": "sequence_stmt_activate",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_actor",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        },
+        {
+          "type": "alias",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_alt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_stmt_alt_branch",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_alt_branch",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_sequence_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_autonumber",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "sequence_stmt_deactivate",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_details",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_link",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_links",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_loop",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_stmt_loop_inner",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_loop_inner",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_sequence_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_note",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        },
+        {
+          "type": "note_placement",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_opt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_stmt_opt_inner",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_opt_inner",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_sequence_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_par",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_stmt_alt_branch",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_participant",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        },
+        {
+          "type": "alias",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_properties",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actor",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_rect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_stmt_rect_inner",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_rect_inner",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_sequence_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_signal",
     "named": true,
     "fields": {},
     "children": {
@@ -175,6 +794,31 @@
         }
       ]
     }
+  },
+  {
+    "type": "sequence_stmt_title",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "title",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "signal_minus_sign",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "signal_plus_sign",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "signal_type",
@@ -228,349 +872,11 @@
       "required": true,
       "types": [
         {
+          "type": "diagram_class",
+          "named": true
+        },
+        {
           "type": "diagram_sequence",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_activate",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_actor",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "alias",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_alt",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "stmt_alt_branch",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_alt_branch",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "_diagram_stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_autonumber",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "stmt_deactivate",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_details",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_link",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_links",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_loop",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "stmt_loop_inner",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_loop_inner",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "_diagram_stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_note",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "note_placement",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_opt",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "stmt_opt_inner",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_opt_inner",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "_diagram_stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_par",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "stmt_alt_branch",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_participant",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "alias",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_properties",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_rect",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "stmt_rect_inner",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_rect_inner",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "_diagram_stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stmt_title",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "title",
           "named": true
         }
       ]
@@ -581,11 +887,55 @@
     "named": false
   },
   {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
     "type": ",",
     "named": false
   },
   {
+    "type": "-",
+    "named": false
+  },
+  {
     "type": ":",
+    "named": false
+  },
+  {
+    "type": ":::",
+    "named": false
+  },
+  {
+    "type": "<",
+    "named": false
+  },
+  {
+    "type": "<<",
+    "named": false
+  },
+  {
+    "type": "<|",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": ">>",
     "named": false
   },
   {
@@ -609,6 +959,10 @@
     "named": false
   },
   {
+    "type": "annotation",
+    "named": true
+  },
+  {
     "type": "arg_directive",
     "named": true
   },
@@ -619,6 +973,70 @@
   {
     "type": "autonumber",
     "named": false
+  },
+  {
+    "type": "cardinality",
+    "named": true
+  },
+  {
+    "type": "class",
+    "named": false
+  },
+  {
+    "type": "classDiagram",
+    "named": false
+  },
+  {
+    "type": "classDiagram-v2",
+    "named": false
+  },
+  {
+    "type": "class_classifier_abstract",
+    "named": true
+  },
+  {
+    "type": "class_classifier_static",
+    "named": true
+  },
+  {
+    "type": "class_label",
+    "named": true
+  },
+  {
+    "type": "class_linetype_dotted",
+    "named": true
+  },
+  {
+    "type": "class_linetype_solid",
+    "named": true
+  },
+  {
+    "type": "class_reltype_aggregation",
+    "named": true
+  },
+  {
+    "type": "class_style_name",
+    "named": true
+  },
+  {
+    "type": "class_visibility_internal",
+    "named": true
+  },
+  {
+    "type": "class_visibility_private",
+    "named": true
+  },
+  {
+    "type": "class_visibility_protected",
+    "named": true
+  },
+  {
+    "type": "class_visibility_public",
+    "named": true
+  },
+  {
+    "type": "comment",
+    "named": true
   },
   {
     "type": "deactivate",
@@ -705,14 +1123,6 @@
     "named": false
   },
   {
-    "type": "signal_minus_sign",
-    "named": true
-  },
-  {
-    "type": "signal_plus_sign",
-    "named": true
-  },
-  {
     "type": "solid_arrow",
     "named": true
   },
@@ -734,18 +1144,34 @@
   },
   {
     "type": "title",
-    "named": true
+    "named": false
   },
   {
     "type": "title",
-    "named": false
+    "named": true
   },
   {
     "type": "type_directive",
     "named": true
   },
   {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "|>",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  },
+  {
     "type": "}%%",
+    "named": false
+  },
+  {
+    "type": "~",
     "named": false
   }
 ]
