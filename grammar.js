@@ -23,7 +23,7 @@ const tokens = {
     note_placement_left: kwd("left of"),
     note_placement_right: kwd("right of"),
 
-    _alpha_num_token: /\S+/,
+    _alpha_num_token: /[a-zA-Z0-9_~]+/,
     _bquote_string: /`[^`]+`/,
     _dquote_string: /"[^"]+"/,
 
@@ -33,7 +33,9 @@ const tokens = {
     class_reltype_dependency: choice("<", ">"),
     class_linetype_solid: "--",
     class_linetype_dotted: "..",
+    class_label: /[^:\n;]+/,
 }
+
 function kwd(word) {
     return alias(reserved(caseInsensitive(word)), word)
 }
@@ -46,6 +48,10 @@ function caseInsensitive(word) {
     return word.split('')
         .map(letter => `[${letter}${letter.toUpperCase()}]`)
         .join('')
+}
+
+function optseq(...args) {
+    return optional(seq(...args))
 }
 
 const tokensFunc = Object.fromEntries(
@@ -74,24 +80,24 @@ module.exports = grammar({
     ],
 
     rules: {
+
+        /// source file, common
         source_file: $ => choice(
             $.diagram_sequence,
             $.diagram_class,
         ),
 
+        directive: $ => seq(
+            "%%{",
+            $.type_directive,
+            optseq(":", $.arg_directive),
+            "}%%"
+        ),
+
+        /// sequence
         diagram_sequence: $ => seq(
             repeat(choice($.directive, $._newline)),
             kwd("sequenceDiagram"), repeat(choice($._sequence_stmt, $._newline))
-        ),
-
-        diagram_class: $ => seq(
-            repeat(choice($.directive, $._newline)),
-            choice(
-                kwd("classDiagram-v2"),
-                kwd("classDiagram"),
-            ),
-            $._newline,
-            repeat(choice($._class_stmt, $._newline))
         ),
 
         _sequence_stmt: $ => choice(
@@ -113,13 +119,6 @@ module.exports = grammar({
             $.sequence_stmt_alt,
             $.sequence_stmt_par,
             $.directive,
-        ),
-
-        directive: $ => seq(
-            "%%{",
-            $.type_directive,
-            optional(seq(":", $.arg_directive)),
-            "}%%"
         ),
 
         sequence_stmt_participant: $ => seq(
@@ -201,8 +200,27 @@ module.exports = grammar({
         ),
 
 
+        /// class diagram
+        diagram_class: $ => seq(
+            repeat(choice($.directive, $._newline)),
+            choice(
+                kwd("classDiagram-v2"),
+                kwd("classDiagram"),
+            ),
+            $._newline,
+            sep($._class_stmt, $._newline),
+            optional($._newline),
+            // repeat(choice($._class_stmt, $._newline))
+        ),
+
         _class_stmt: $ => choice(
             $.class_stmt_relation,
+            $.class_stmt_class,
+            $.class_stmt_method,
+            $.class_stmt_annotation,
+            // TODO
+            // $.class_stmt_click,
+            // $.class_stmt_css,
         ),
 
         class_stmt_relation: $ => seq(
@@ -211,10 +229,18 @@ module.exports = grammar({
             $.class_relation,
             optional(alias($._dquote_string, $.cardinality)),
             $.class_name,
+            optseq(":", optional($.class_label))
         ),
-        class_name: $ => choice(
-            $._alpha_num_token,
-            $._bquote_string,
+        class_name: $ => seq($.class_name_body, optional($.class_generics)),
+        class_name_body: $ => seq(
+            repeat($._alpha_num_token),
+            choice(
+                $._alpha_num_token,
+                $._bquote_string,
+            ),
+        ),
+        class_generics: $ => seq(
+            "~", alias(/[^~]+/, $.class_name), "~"
         ),
         class_relation: $ => seq(
             optional($._class_reltype),
@@ -231,6 +257,51 @@ module.exports = grammar({
             $.class_linetype_solid,
             $.class_linetype_dotted,
         ),
+
+        class_stmt_class: $ => seq(
+            "class", $.class_name,
+            optseq(":::", alias($._alpha_num_token, $.class_style_name)),
+            optseq(
+                "{",
+                optional($._newline),
+                sep(choice($.class_method_line, $.class_annotation_line), $._newline),
+                optional($._newline),
+                "}",
+            )
+        ),
+        class_method_line: $ => seq(
+            optional(choice(
+                alias("+", $.class_visibility_public),
+                alias("-", $.class_visibility_private),
+                alias("#", $.class_visibility_protected),
+                alias("~", $.class_visibility_internal),
+            )),
+            repeat1(
+                choice(
+                    "(",
+                    ")",
+                    $._alpha_num_token,
+                ),
+            ),
+            optional(choice(
+                alias("*", $.class_classifier_abstract),
+                alias("$", $.class_classifier_static),
+            )),
+        ),
+        class_annotation_line: $ => seq(
+            "<<", alias($._alpha_num_token, $.annotation), ">>",
+        ),
+
+        class_stmt_method: $ => seq(
+            $.class_name, ":", $.class_method_line,
+        ),
+
+        class_stmt_annotation: $ => seq(
+            "<<", alias($._alpha_num_token, $.annotation), ">>",
+            $.class_name
+        ),
+        // class_stmt_click: $ => seq(),
+        // class_stmt_css: $ => seq(),
 
         ... tokensFunc
     }
