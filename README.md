@@ -5,7 +5,6 @@
 ## Supported Syntax
 
 - [ ] Class
-- [ ] Common
 - [ ] Er
 - [ ] Flowchart
 - [ ] Gantt
