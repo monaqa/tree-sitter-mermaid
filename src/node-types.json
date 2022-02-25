@@ -171,6 +171,16 @@
     }
   },
   {
+    "type": "class_label",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "class_linetype_solid",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "class_method_line",
     "named": true,
     "fields": {},
@@ -390,6 +400,85 @@
     }
   },
   {
+    "type": "diagram_state",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "direction_bt",
+          "named": true
+        },
+        {
+          "type": "direction_lr",
+          "named": true
+        },
+        {
+          "type": "direction_rl",
+          "named": true
+        },
+        {
+          "type": "direction_tb",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "state_division",
+          "named": true
+        },
+        {
+          "type": "state_note",
+          "named": true
+        },
+        {
+          "type": "state_stmt_annotation",
+          "named": true
+        },
+        {
+          "type": "state_stmt_arrow",
+          "named": true
+        },
+        {
+          "type": "state_stmt_composite",
+          "named": true
+        },
+        {
+          "type": "state_stmt_hide_empty_description",
+          "named": true
+        },
+        {
+          "type": "state_stmt_simple",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "direction_bt",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "direction_lr",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "direction_rl",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "direction_tb",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "directive",
     "named": true,
     "fields": {},
@@ -407,6 +496,16 @@
         }
       ]
     }
+  },
+  {
+    "type": "dotted_open_arrow",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "note_content",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "note_placement",
@@ -878,6 +977,262 @@
         {
           "type": "diagram_sequence",
           "named": true
+        },
+        {
+          "type": "diagram_state",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_alias",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "state_description",
+          "named": true
+        },
+        {
+          "type": "state_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_annotation_choice",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "state_annotation_fork",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "state_annotation_join",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "state_arrow",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "state_composite_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "direction_bt",
+          "named": true
+        },
+        {
+          "type": "direction_lr",
+          "named": true
+        },
+        {
+          "type": "direction_rl",
+          "named": true
+        },
+        {
+          "type": "direction_tb",
+          "named": true
+        },
+        {
+          "type": "state_division",
+          "named": true
+        },
+        {
+          "type": "state_note",
+          "named": true
+        },
+        {
+          "type": "state_stmt_annotation",
+          "named": true
+        },
+        {
+          "type": "state_stmt_arrow",
+          "named": true
+        },
+        {
+          "type": "state_stmt_composite",
+          "named": true
+        },
+        {
+          "type": "state_stmt_hide_empty_description",
+          "named": true
+        },
+        {
+          "type": "state_stmt_simple",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_description",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "state_division",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "state_hide_empty_description",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "state_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "state_note",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "note_content",
+          "named": true
+        },
+        {
+          "type": "note_placement",
+          "named": true
+        },
+        {
+          "type": "state_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_stmt_annotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "state_annotation_choice",
+          "named": true
+        },
+        {
+          "type": "state_annotation_fork",
+          "named": true
+        },
+        {
+          "type": "state_annotation_join",
+          "named": true
+        },
+        {
+          "type": "state_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_stmt_arrow",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "state_arrow",
+          "named": true
+        },
+        {
+          "type": "state_description",
+          "named": true
+        },
+        {
+          "type": "state_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_stmt_composite",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "state_alias",
+          "named": true
+        },
+        {
+          "type": "state_composite_body",
+          "named": true
+        },
+        {
+          "type": "state_id",
+          "named": true
+        },
+        {
+          "type": "state_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_stmt_hide_empty_description",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "state_hide_empty_description",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_stmt_simple",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "state_alias",
+          "named": true
+        },
+        {
+          "type": "state_description",
+          "named": true
+        },
+        {
+          "type": "state_name",
+          "named": true
         }
       ]
     }
@@ -911,6 +1266,14 @@
     "named": false
   },
   {
+    "type": "--",
+    "named": false
+  },
+  {
+    "type": "-->",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
@@ -936,6 +1299,10 @@
   },
   {
     "type": ">>",
+    "named": false
+  },
+  {
+    "type": "[*]",
     "named": false
   },
   {
@@ -999,15 +1366,7 @@
     "named": true
   },
   {
-    "type": "class_label",
-    "named": true
-  },
-  {
     "type": "class_linetype_dotted",
-    "named": true
-  },
-  {
-    "type": "class_linetype_solid",
     "named": true
   },
   {
@@ -1047,15 +1406,27 @@
     "named": false
   },
   {
+    "type": "direction bt",
+    "named": false
+  },
+  {
+    "type": "direction lr",
+    "named": false
+  },
+  {
+    "type": "direction rl",
+    "named": false
+  },
+  {
+    "type": "direction tb",
+    "named": false
+  },
+  {
     "type": "dotted_arrow",
     "named": true
   },
   {
     "type": "dotted_cross",
-    "named": true
-  },
-  {
-    "type": "dotted_open_arrow",
     "named": true
   },
   {
@@ -1068,6 +1439,10 @@
   },
   {
     "type": "end",
+    "named": false
+  },
+  {
+    "type": "hide empty description",
     "named": false
   },
   {
@@ -1087,7 +1462,7 @@
     "named": false
   },
   {
-    "type": "note",
+    "type": "note ",
     "named": false
   },
   {
@@ -1136,6 +1511,22 @@
   },
   {
     "type": "solid_point",
+    "named": true
+  },
+  {
+    "type": "state ",
+    "named": false
+  },
+  {
+    "type": "stateDiagram",
+    "named": false
+  },
+  {
+    "type": "stateDiagram-v2",
+    "named": false
+  },
+  {
+    "type": "state_id",
     "named": true
   },
   {
