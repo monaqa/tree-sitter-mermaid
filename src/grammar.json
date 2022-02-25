@@ -1433,7 +1433,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_alpha_num_token"
+            "name": "_class_name"
           }
         },
         {
@@ -1441,7 +1441,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_alpha_num_token"
+              "name": "_class_name"
             },
             {
               "type": "SYMBOL",
@@ -1841,7 +1841,7 @@
       "type": "PATTERN",
       "value": "[ \\t]+"
     },
-    "_comment": {
+    "comment": {
       "type": "PATTERN",
       "value": "%%([^\\{].*)?\\n"
     },
@@ -1937,6 +1937,10 @@
       "named": false,
       "value": "right of"
     },
+    "_class_name": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z0-9_]+"
+    },
     "_alpha_num_token": {
       "type": "PATTERN",
       "value": "[a-zA-Z0-9_~]+"
@@ -2003,7 +2007,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_comment"
+      "name": "comment"
     }
   ],
   "conflicts": [],

@@ -1,6 +1,6 @@
 const tokens = {
     _whitespace: /[ \t]+/,
-    _comment: /%%([^\{].*)?\n/,
+    comment: /%%([^\{].*)?\n/,
     type_directive: /[^\}:.][^:.]*/,
     arg_directive: /([^\}:.]|\n)([^:.]|\n)*/,
     _newline: /(\n)+/,
@@ -23,6 +23,7 @@ const tokens = {
     note_placement_left: kwd("left of"),
     note_placement_right: kwd("right of"),
 
+    _class_name: /[a-zA-Z0-9_]+/,
     _alpha_num_token: /[a-zA-Z0-9_~]+/,
     _bquote_string: /`[^`]+`/,
     _dquote_string: /"[^"]+"/,
@@ -69,7 +70,7 @@ module.exports = grammar({
 
     extras: $ => [
         $._whitespace,
-        $._comment,
+        $.comment,
     ],
 
     supertypes: $ => [
@@ -233,9 +234,9 @@ module.exports = grammar({
         ),
         class_name: $ => seq($.class_name_body, optional($.class_generics)),
         class_name_body: $ => seq(
-            repeat($._alpha_num_token),
+            repeat($._class_name),
             choice(
-                $._alpha_num_token,
+                $._class_name,
                 $._bquote_string,
             ),
         ),

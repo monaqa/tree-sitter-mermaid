@@ -257,7 +257,9 @@ Square : +getMessages() List~string~
   (diagram_class
     (class_stmt_class
       (class_name
-        (class_name_body))
+        (class_name_body)
+        (class_generics
+          (class_name)))
       (class_method_line)
       (class_method_line)
       (class_method_line)

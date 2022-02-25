@@ -1035,6 +1035,10 @@
     "named": true
   },
   {
+    "type": "comment",
+    "named": true
+  },
+  {
     "type": "deactivate",
     "named": false
   },
