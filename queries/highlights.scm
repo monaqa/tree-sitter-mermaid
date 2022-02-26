@@ -5,6 +5,7 @@
  "stateDiagram"
  "stateDiagram-v2"
  "gantt"
+ "pie"
 
  "participant"
  "as"
@@ -107,3 +108,6 @@
  ] @type
 
 (directive) @include
+
+(pie_label) @string
+(pie_value) @float
