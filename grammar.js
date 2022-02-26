@@ -69,6 +69,11 @@ const tokens = {
     // gantt_task_text: /[^#:\n;]+/,
     gantt_task_text: repeat1(/[^#:\n;\s]+/),
     gantt_task_data: /[^#:\n;]+/,
+
+    pie_showdata: kwd("showdata"),
+    pie_title: /[^\n;#]+/,
+    pie_label: /"[^"]*"/,
+    pie_value: /[\s]*[\d]+(\.[\d]+)?/,
 }
 
 function kwd(word) {
@@ -110,6 +115,10 @@ module.exports = grammar({
     supertypes: $ => [
         $._sequence_stmt,
         $._class_stmt,
+        $._state_stmt,
+        $._gantt_stmt,
+        $._pie_stmt,
+
         $._class_reltype,
         $._class_linetype,
     ],
@@ -122,6 +131,7 @@ module.exports = grammar({
             $.diagram_class,
             $.diagram_state,
             $.diagram_gantt,
+            $.diagram_pie,
         ),
 
         directive: $ => seq(
@@ -482,6 +492,31 @@ module.exports = grammar({
 
         gantt_stmt_task: $ => seq(
             $.gantt_task_text, ":", $.gantt_task_data,
+        ),
+
+        /// pie chart
+        diagram_pie: $ => seq(
+            repeat(choice($.directive, $._newline)),
+            kwd("pie"),
+            optional($.pie_showdata),
+            repeat(choice($._pie_stmt, $._newline))
+        ),
+
+        _pie_stmt: $ => choice(
+            $.pie_stmt_title,
+            $.pie_stmt_element,
+            $.directive,
+        ),
+
+        pie_stmt_title: $ => seq(
+            kwd("title"),
+            optional($.pie_title),
+        ),
+
+        pie_stmt_element: $ => seq(
+            $.pie_label,
+            ":",
+            $.pie_value,
         ),
 
         ... tokensFunc

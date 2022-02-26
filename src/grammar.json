@@ -19,6 +19,10 @@
         {
           "type": "SYMBOL",
           "name": "diagram_gantt"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "diagram_pie"
         }
       ]
     },
@@ -2786,6 +2790,138 @@
         }
       ]
     },
+    "diagram_pie": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "directive"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[pP][iI][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "pie"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "pie_showdata"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_pie_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_pie_stmt": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "pie_stmt_title"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "pie_stmt_element"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "directive"
+        }
+      ]
+    },
+    "pie_stmt_title": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][iI][tT][lL][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "title"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "pie_title"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "pie_stmt_element": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "pie_label"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "pie_value"
+        }
+      ]
+    },
     "_whitespace": {
       "type": "PATTERN",
       "value": "[ \\t]+"
@@ -3278,6 +3414,34 @@
     "gantt_task_data": {
       "type": "PATTERN",
       "value": "[^#:\\n;]+"
+    },
+    "pie_showdata": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "PATTERN",
+            "value": "[sS][hH][oO][wW][dD][aA][tT][aA]"
+          }
+        }
+      },
+      "named": false,
+      "value": "showdata"
+    },
+    "pie_title": {
+      "type": "PATTERN",
+      "value": "[^\\n;#]+"
+    },
+    "pie_label": {
+      "type": "PATTERN",
+      "value": "\"[^\"]*\""
+    },
+    "pie_value": {
+      "type": "PATTERN",
+      "value": "[\\s]*[\\d]+(\\.[\\d]+)?"
     }
   },
   "extras": [
@@ -3297,6 +3461,9 @@
   "supertypes": [
     "_sequence_stmt",
     "_class_stmt",
+    "_state_stmt",
+    "_gantt_stmt",
+    "_pie_stmt",
     "_class_reltype",
     "_class_linetype"
   ]

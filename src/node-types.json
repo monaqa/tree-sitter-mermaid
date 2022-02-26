@@ -58,6 +58,74 @@
     ]
   },
   {
+    "type": "_gantt_stmt",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "directive",
+        "named": true
+      },
+      {
+        "type": "gantt_stmt_axisformat",
+        "named": true
+      },
+      {
+        "type": "gantt_stmt_dateformat",
+        "named": true
+      },
+      {
+        "type": "gantt_stmt_excludes",
+        "named": true
+      },
+      {
+        "type": "gantt_stmt_includes",
+        "named": true
+      },
+      {
+        "type": "gantt_stmt_inclusiveenddates",
+        "named": true
+      },
+      {
+        "type": "gantt_stmt_section",
+        "named": true
+      },
+      {
+        "type": "gantt_stmt_task",
+        "named": true
+      },
+      {
+        "type": "gantt_stmt_title",
+        "named": true
+      },
+      {
+        "type": "gantt_stmt_todaymarker",
+        "named": true
+      },
+      {
+        "type": "gantt_stmt_topaxis",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_pie_stmt",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "directive",
+        "named": true
+      },
+      {
+        "type": "pie_stmt_element",
+        "named": true
+      },
+      {
+        "type": "pie_stmt_title",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "_sequence_stmt",
     "named": true,
     "subtypes": [
@@ -131,6 +199,56 @@
       },
       {
         "type": "sequence_stmt_title",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_state_stmt",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "direction_bt",
+        "named": true
+      },
+      {
+        "type": "direction_lr",
+        "named": true
+      },
+      {
+        "type": "direction_rl",
+        "named": true
+      },
+      {
+        "type": "direction_tb",
+        "named": true
+      },
+      {
+        "type": "state_division",
+        "named": true
+      },
+      {
+        "type": "state_note",
+        "named": true
+      },
+      {
+        "type": "state_stmt_annotation",
+        "named": true
+      },
+      {
+        "type": "state_stmt_arrow",
+        "named": true
+      },
+      {
+        "type": "state_stmt_composite",
+        "named": true
+      },
+      {
+        "type": "state_stmt_hide_empty_description",
+        "named": true
+      },
+      {
+        "type": "state_stmt_simple",
         "named": true
       }
     ]
@@ -398,47 +516,26 @@
       "required": false,
       "types": [
         {
-          "type": "directive",
+          "type": "_gantt_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_pie",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_pie_stmt",
           "named": true
         },
         {
-          "type": "gantt_stmt_axisformat",
-          "named": true
-        },
-        {
-          "type": "gantt_stmt_dateformat",
-          "named": true
-        },
-        {
-          "type": "gantt_stmt_excludes",
-          "named": true
-        },
-        {
-          "type": "gantt_stmt_includes",
-          "named": true
-        },
-        {
-          "type": "gantt_stmt_inclusiveenddates",
-          "named": true
-        },
-        {
-          "type": "gantt_stmt_section",
-          "named": true
-        },
-        {
-          "type": "gantt_stmt_task",
-          "named": true
-        },
-        {
-          "type": "gantt_stmt_title",
-          "named": true
-        },
-        {
-          "type": "gantt_stmt_todaymarker",
-          "named": true
-        },
-        {
-          "type": "gantt_stmt_topaxis",
+          "type": "pie_showdata",
           "named": true
         }
       ]
@@ -468,51 +565,11 @@
       "required": true,
       "types": [
         {
-          "type": "direction_bt",
-          "named": true
-        },
-        {
-          "type": "direction_lr",
-          "named": true
-        },
-        {
-          "type": "direction_rl",
-          "named": true
-        },
-        {
-          "type": "direction_tb",
+          "type": "_state_stmt",
           "named": true
         },
         {
           "type": "directive",
-          "named": true
-        },
-        {
-          "type": "state_division",
-          "named": true
-        },
-        {
-          "type": "state_note",
-          "named": true
-        },
-        {
-          "type": "state_stmt_annotation",
-          "named": true
-        },
-        {
-          "type": "state_stmt_arrow",
-          "named": true
-        },
-        {
-          "type": "state_stmt_composite",
-          "named": true
-        },
-        {
-          "type": "state_stmt_hide_empty_description",
-          "named": true
-        },
-        {
-          "type": "state_stmt_simple",
           "named": true
         }
       ]
@@ -799,6 +856,45 @@
     "type": "note_placement_right",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "pie_showdata",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "pie_stmt_element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "pie_label",
+          "named": true
+        },
+        {
+          "type": "pie_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pie_stmt_title",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "pie_title",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "sequence_stmt_activate",
@@ -1243,6 +1339,10 @@
           "named": true
         },
         {
+          "type": "diagram_pie",
+          "named": true
+        },
+        {
           "type": "diagram_sequence",
           "named": true
         },
@@ -1301,47 +1401,7 @@
       "required": true,
       "types": [
         {
-          "type": "direction_bt",
-          "named": true
-        },
-        {
-          "type": "direction_lr",
-          "named": true
-        },
-        {
-          "type": "direction_rl",
-          "named": true
-        },
-        {
-          "type": "direction_tb",
-          "named": true
-        },
-        {
-          "type": "state_division",
-          "named": true
-        },
-        {
-          "type": "state_note",
-          "named": true
-        },
-        {
-          "type": "state_stmt_annotation",
-          "named": true
-        },
-        {
-          "type": "state_stmt_arrow",
-          "named": true
-        },
-        {
-          "type": "state_stmt_composite",
-          "named": true
-        },
-        {
-          "type": "state_stmt_hide_empty_description",
-          "named": true
-        },
-        {
-          "type": "state_stmt_simple",
+          "type": "_state_stmt",
           "named": true
         }
       ]
@@ -1784,6 +1844,22 @@
     "named": false
   },
   {
+    "type": "pie",
+    "named": false
+  },
+  {
+    "type": "pie_label",
+    "named": true
+  },
+  {
+    "type": "pie_title",
+    "named": true
+  },
+  {
+    "type": "pie_value",
+    "named": true
+  },
+  {
     "type": "properties",
     "named": false
   },
@@ -1801,6 +1877,10 @@
   },
   {
     "type": "sequenceDiagram",
+    "named": false
+  },
+  {
+    "type": "showdata",
     "named": false
   },
   {
