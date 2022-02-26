@@ -2,12 +2,14 @@
  "sequenceDiagram"
  "classDiagram"
  "classDiagram-v2"
+ "stateDiagram"
+ "stateDiagram-v2"
 
  "participant"
  "as"
  "activate"
  "deactivate"
- "note"
+ "note "
  "over"
  "link"
  "links"
@@ -29,6 +31,8 @@
  (note_placement_right)
 
  "class"
+
+ "state "
  ] @keyword
 
 [
@@ -44,6 +48,8 @@
  (class_visibility_private)
  (class_visibility_protected)
  (class_visibility_internal)
+
+ (state_division)
  ] @punctuation.delimiter
 
 [
@@ -54,6 +60,7 @@
  ] @punctuation.bracket
 
 [
+ "-->"
  (solid_arrow)
  (dotted_arrow)
  (solid_open_arrow)
@@ -74,10 +81,16 @@
 (actor) @field
 (class_name) @field
 
+(state_name) @field
+
 [
  (class_annotation_line)
  (class_stmt_annotation)
  (class_generics)
+
+ (state_annotation_fork)
+ (state_annotation_join)
+ (state_annotation_choice)
  ] @type
 
 (directive) @include
