@@ -1,0 +1,50 @@
+flowchart TB
+    c1-->a2
+    subgraph one
+    a1-->a2
+    end
+    subgraph two [four]
+    b1-->b2
+    end
+    subgraph
+    c1-->c2
+    end
+
+  subgraph TOP
+    direction TB
+    subgraph B1
+        direction RL
+        i1 -->f1
+    end
+    subgraph B2
+        direction BT
+        i2 -->f2
+    end
+  end
+  A --> TOP --> B
+  B1 --> B2
+    id
+    id1[This is the text in the box]
+    id1(This is the text in the box)
+    id1([This is the text in the box])
+    id1[[This is the text in the box]]
+    id1[(Database)]
+    id1((This is the text in the circle))
+    id1>This is the text in the box]
+    id1{This is the text in the box}
+    id1{{This is the text in the box}}
+    id1[/This is the text in the box/]
+    id1[\This is the text in the box\]
+    A[/Christmas\]
+    B[\Go shopping/]
+    A-->B
+    A --- B
+    A-- This is the text! ---B
+    A---|This is the text|B
+    A-->|text|B
+    A-- text -->B
+    A-.->B;
+    A-. text .-> B
+    A ==> B
+    A == text ==> B
+    A -- text --> B -- text2 --> C

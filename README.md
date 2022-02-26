@@ -8,11 +8,11 @@ There may be unsupported grammars for some types, even if they are marked as com
 
 - [x] Class
 - [ ] Er
-- [ ] Flowchart
+- [x] Flowchart
 - [x] Gantt
 - [ ] Git
 - [ ] Info
-- [ ] Pie
+- [x] Pie
 - [ ] Requirement
 - [x] Sequence
 - [x] State

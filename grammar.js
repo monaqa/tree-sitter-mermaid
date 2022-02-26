@@ -31,7 +31,7 @@ const tokens = {
     note_placement_right: kwd("right of"),
 
     _class_name: /[a-zA-Z0-9_]+/,
-    _alpha_num_token: /[a-zA-Z0-9_~]+/,
+    _alpha_num_token: /[a-zA-Z0-9_~!?]+/,
     _bquote_string: /`[^`]+`/,
     _dquote_string: /"[^"]+"/,
 
@@ -69,6 +69,31 @@ const tokens = {
     // gantt_task_text: /[^#:\n;]+/,
     gantt_task_text: repeat1(/[^#:\n;\s]+/),
     gantt_task_data: /[^#:\n;]+/,
+
+    pie_showdata: kwd("showdata"),
+    pie_title: /[^\n;#]+/,
+    pie_label: /"[^"]*"/,
+    pie_value: /[\s]*[\d]+(\.[\d]+)?/,
+
+    flowchart_direction_lr: choice("LR", "BR", ">"),
+    flowchart_direction_rl: choice("RL", "<"),
+    flowchart_direction_tb: choice("TB", "TD", "v"),
+    flowchart_direction_bt: choice("BT", "^"),
+
+    flow_text_literal: repeat1(/[^-|}\])\s\n;/\\]+/),
+    flow_text_quoted: (/"[^"\n]*"/),
+
+    // 適当
+    flow_link_arrow: choice(
+        /[xo<]?--+[-xo>]/,
+        /[xo<]?==+[=xo>]/,
+        /[xo<]?-?\.+-[xo>]/,
+    ),
+    flow_link_arrow_start: choice(
+        /[xo<]?--+/,
+        /[xo<]?==+/,
+        /[xo<]?-\.+/,
+    ),
 }
 
 function kwd(word) {
@@ -110,8 +135,15 @@ module.exports = grammar({
     supertypes: $ => [
         $._sequence_stmt,
         $._class_stmt,
+        $._state_stmt,
+
         $._class_reltype,
         $._class_linetype,
+        $._gantt_stmt,
+        $._pie_stmt,
+        $._flow_stmt,
+        $._flow_link,
+        $._flow_vertex_kind,
     ],
 
     rules: {
@@ -122,6 +154,8 @@ module.exports = grammar({
             $.diagram_class,
             $.diagram_state,
             $.diagram_gantt,
+            $.diagram_pie,
+            $.diagram_flow,
         ),
 
         directive: $ => seq(
@@ -216,30 +250,30 @@ module.exports = grammar({
 
         sequence_stmt_loop: $ => seq(
             kwd("loop"), alias($._rest_text, $.text), $._newline,
-            optional(alias($._subdocument, $.sequence_stmt_loop_inner)),
+            optional(alias($._sequence_subdocument, $.sequence_stmt_loop_inner)),
             kwd("end")
         ),
         sequence_stmt_rect: $ => seq(
             kwd("rect"), alias($._rest_text, $.text), $._newline,
-            optional(alias($._subdocument, $.sequence_stmt_rect_inner)),
+            optional(alias($._sequence_subdocument, $.sequence_stmt_rect_inner)),
             kwd("end")
         ),
         sequence_stmt_opt: $ => seq(
             kwd("opt"), alias($._rest_text, $.text), $._newline,
-            optional(alias($._subdocument, $.sequence_stmt_opt_inner)),
+            optional(alias($._sequence_subdocument, $.sequence_stmt_opt_inner)),
             kwd("end")
         ),
-        _subdocument: $ => repeat1(choice($._sequence_stmt, $._newline)),
+        _sequence_subdocument: $ => repeat1(choice($._sequence_stmt, $._newline)),
 
         sequence_stmt_alt: $ => seq(
             kwd("alt"), alias($._rest_text, $.text), $._newline,
-            sep(alias($._subdocument, $.sequence_stmt_alt_branch), kwd("else")),
+            sep(alias($._sequence_subdocument, $.sequence_stmt_alt_branch), kwd("else")),
             kwd("end")
         ),
 
         sequence_stmt_par: $ => seq(
             kwd("par"), alias($._rest_text, $.text), $._newline,
-            sep(alias($._subdocument, $.sequence_stmt_alt_branch), kwd("and")),
+            sep(alias($._sequence_subdocument, $.sequence_stmt_alt_branch), kwd("and")),
             kwd("end")
         ),
 
@@ -483,6 +517,136 @@ module.exports = grammar({
         gantt_stmt_task: $ => seq(
             $.gantt_task_text, ":", $.gantt_task_data,
         ),
+
+        /// pie chart
+        diagram_pie: $ => seq(
+            repeat(choice($.directive, $._newline)),
+            kwd("pie"),
+            optional($.pie_showdata),
+            repeat(choice($._pie_stmt, $._newline))
+        ),
+
+        _pie_stmt: $ => choice(
+            $.pie_stmt_title,
+            $.pie_stmt_element,
+            $.directive,
+        ),
+
+        pie_stmt_title: $ => seq(
+            kwd("title"),
+            optional($.pie_title),
+        ),
+
+        pie_stmt_element: $ => seq(
+            $.pie_label,
+            ":",
+            $.pie_value,
+        ),
+
+        /// flow chart
+        diagram_flow: $ => seq(
+            repeat(choice($.directive, $._newline)),
+            kwd("flowchart"),
+            choice(
+                $._flowchart_direction,
+                $._newline,
+            ),
+            optional($._newline),
+            sep($._flow_stmt, choice($._newline, ";")),
+            optional(choice($._newline, ";")),
+        ),
+        _flowchart_direction: $ => choice(
+            $.flowchart_direction_lr,
+            $.flowchart_direction_rl,
+            $.flowchart_direction_tb,
+            $.flowchart_direction_bt,
+        ),
+
+        _flow_stmt: $ => choice(
+            $.flow_stmt_vertice,
+            // $.flow_stmt_style,
+            // $.flow_stmt_linkstyle,
+            // $.flow_stmt_classdef,
+            // $.flow_stmt_class,
+            $.flow_stmt_subgraph,
+            $.flow_stmt_direction,
+        ),
+
+        flow_stmt_direction: $ => seq(kwd("direction"), $._flowchart_direction),
+
+        flow_stmt_vertice: $ => sep($.flow_node, $._flow_link),
+
+        flow_node: $ => sep($.flow_vertex, "&"),
+
+        _flow_link: $ => choice(
+            $.flow_link_simplelink,
+            $.flow_link_arrowtext,
+            $.flow_link_middletext,
+        ),
+
+        flow_link_simplelink: $ => seq($.flow_link_arrow),
+        flow_link_arrowtext: $ => seq($.flow_link_arrow, "|", $.flow_arrow_text, "|"),
+        flow_link_middletext: $ => seq(
+            $.flow_link_arrow_start,
+            $.flow_arrow_text,
+            $.flow_link_arrow,
+        ),
+        flow_arrow_text: $ => repeat1($._alpha_num_token),
+
+        flow_vertex_id: $ => $._alpha_num_token,
+
+        flow_vertex: $ => seq(
+            $.flow_vertex_id,
+            optional($._flow_vertex_kind),
+        ),
+        _flow_vertex_kind: $ => choice(
+            $.flow_vertex_square,
+            $.flow_vertex_circle,
+            $.flow_vertex_ellipse,
+            $.flow_vertex_stadium,
+            $.flow_vertex_subroutine,
+            $.flow_vertex_rect,
+            $.flow_vertex_cylinder,
+            $.flow_vertex_round,
+            $.flow_vertex_diamond,
+            $.flow_vertex_hexagon,
+            $.flow_vertex_odd,
+            $.flow_vertex_trapezoid,
+            $.flow_vertex_inv_trapezoid,
+            $.flow_vertex_leanright,
+            $.flow_vertex_leanleft,
+        ),
+        flow_vertex_square: $ => seq( "[", $._flow_text, "]" ),
+        flow_vertex_circle: $ => seq("((", $._flow_text, "))"),
+        flow_vertex_ellipse: $ => seq( "(-", $._flow_text, "-)" ),
+        flow_vertex_stadium: $ => seq("([", $._flow_text, "])"),
+        flow_vertex_subroutine: $ => seq("[[", $._flow_text, "]]"),
+        flow_vertex_rect: $ => seq( "[|", $._flow_text, "|]" ),
+        flow_vertex_cylinder: $ => seq("[(", $._flow_text, ")]"),
+        flow_vertex_round: $ => seq("(", $._flow_text, ")"),
+        flow_vertex_diamond: $ => seq( "{", $._flow_text, "}" ),
+        flow_vertex_hexagon: $ => seq( "{{", $._flow_text, "}}" ),
+        flow_vertex_odd: $ => seq( ">", $._flow_text, "]" ),
+        flow_vertex_trapezoid: $ => seq( "[/", $._flow_text, "\\]" ),
+        flow_vertex_inv_trapezoid: $ => seq( "[\\", $._flow_text, "/]" ),
+        flow_vertex_leanright: $ => seq("[/", $._flow_text, "/]" ),
+        flow_vertex_leanleft: $ => seq( "[\\", $._flow_text, "\\]" ),
+        _flow_text: $ => choice($.flow_text_literal, $.flow_text_quoted),
+
+        flow_stmt_subgraph: $ => seq(
+            "subgraph",
+            optional(
+                choice(
+                    seq($.flow_vertex_id, "[", $.flow_vertex_text, "]",),
+                    seq($.flow_vertex_text),
+                ),
+            ),
+            choice(";", $._newline),
+            optional($.flow_stmt_subgraph_inner),
+            "end",
+        ),
+        flow_stmt_subgraph_inner: $ => repeat1(seq($._flow_stmt, choice($._newline, ";"))),
+        flow_vertex_text: $ => repeat1($._alpha_num_token),
 
         ... tokensFunc
     }
