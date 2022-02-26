@@ -15,6 +15,10 @@
         {
           "type": "SYMBOL",
           "name": "diagram_state"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "diagram_gantt"
         }
       ]
     },
@@ -2389,6 +2393,399 @@
         }
       ]
     },
+    "diagram_gantt": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "directive"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[gG][aA][nN][tT][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "gantt"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_gantt_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_gantt_stmt": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "gantt_stmt_dateformat"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gantt_stmt_inclusiveenddates"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gantt_stmt_topaxis"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gantt_stmt_axisformat"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gantt_stmt_includes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gantt_stmt_excludes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gantt_stmt_todaymarker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gantt_stmt_title"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gantt_stmt_section"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gantt_stmt_task"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "directive"
+        }
+      ]
+    },
+    "gantt_stmt_dateformat": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[dD][aA][tT][eE][fF][oO][rR][mM][aA][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "dateformat"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "gantt_meta_format"
+          },
+          "named": true,
+          "value": "gantt_date_format"
+        }
+      ]
+    },
+    "gantt_stmt_inclusiveenddates": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[iI][nN][cC][lL][uU][sS][iI][vV][eE][eE][nN][dD][dD][aA][tT][eE][sS]"
+              }
+            }
+          },
+          "named": false,
+          "value": "inclusiveenddates"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "gantt_meta_format"
+          },
+          "named": true,
+          "value": "gantt_end_dates"
+        }
+      ]
+    },
+    "gantt_stmt_topaxis": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][oO][pP][aA][xX][iI][sS]"
+              }
+            }
+          },
+          "named": false,
+          "value": "topaxis"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "gantt_meta_format"
+          },
+          "named": true,
+          "value": "gantt_top_axis"
+        }
+      ]
+    },
+    "gantt_stmt_axisformat": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[aA][xX][iI][sS][fF][oO][rR][mM][aA][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "axisformat"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "gantt_meta_format"
+          },
+          "named": true,
+          "value": "gantt_axis_format"
+        }
+      ]
+    },
+    "gantt_stmt_includes": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[iI][nN][cC][lL][uU][dD][eE][sS]"
+              }
+            }
+          },
+          "named": false,
+          "value": "includes"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "gantt_meta_format"
+          },
+          "named": true,
+          "value": "gantt_includes"
+        }
+      ]
+    },
+    "gantt_stmt_excludes": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[eE][xX][cC][lL][uU][dD][eE][sS]"
+              }
+            }
+          },
+          "named": false,
+          "value": "excludes"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "gantt_meta_format"
+          },
+          "named": true,
+          "value": "gantt_excludes"
+        }
+      ]
+    },
+    "gantt_stmt_todaymarker": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][oO][dD][aA][yY][mM][aA][rR][kK][eE][rR]"
+              }
+            }
+          },
+          "named": false,
+          "value": "todaymarker"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "gantt_meta_format"
+          },
+          "named": true,
+          "value": "gantt_today_marker"
+        }
+      ]
+    },
+    "gantt_stmt_title": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][iI][tT][lL][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "title"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "gantt_meta_format"
+          },
+          "named": true,
+          "value": "gantt_title"
+        }
+      ]
+    },
+    "gantt_stmt_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[sS][eE][cC][tT][iI][oO][nN]"
+              }
+            }
+          },
+          "named": false,
+          "value": "section"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "gantt_meta_format"
+          },
+          "named": true,
+          "value": "gantt_section"
+        }
+      ]
+    },
+    "gantt_stmt_task": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "gantt_task_text"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gantt_task_data"
+        }
+      ]
+    },
     "_whitespace": {
       "type": "PATTERN",
       "value": "[ \\t]+"
@@ -2866,6 +3263,21 @@
           }
         }
       ]
+    },
+    "gantt_meta_format": {
+      "type": "PATTERN",
+      "value": "[^#\\n;]+"
+    },
+    "gantt_task_text": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^#:\\n;\\s]+"
+      }
+    },
+    "gantt_task_data": {
+      "type": "PATTERN",
+      "value": "[^#:\\n;]+"
     }
   },
   "extras": [

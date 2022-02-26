@@ -4,6 +4,7 @@
  "classDiagram-v2"
  "stateDiagram"
  "stateDiagram-v2"
+ "gantt"
 
  "participant"
  "as"
@@ -33,6 +34,16 @@
  "class"
 
  "state "
+
+ "dateformat"
+ "inclusiveenddates"
+ "topaxis"
+ "axisformat"
+ "includes"
+ "excludes"
+ "todaymarker"
+ "title"
+ "section"
  ] @keyword
 
 [
@@ -82,6 +93,8 @@
 (class_name) @field
 
 (state_name) @field
+
+(gantt_task_text) @field
 
 [
  (class_annotation_line)
