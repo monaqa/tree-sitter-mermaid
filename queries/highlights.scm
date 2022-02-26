@@ -6,6 +6,7 @@
  "stateDiagram-v2"
  "gantt"
  "pie"
+ "flowchart"
 
  "participant"
  "as"
@@ -45,6 +46,10 @@
  "todaymarker"
  "title"
  "section"
+
+ "direction"
+ "subgraph"
+
  ] @keyword
 
 [
@@ -88,6 +93,8 @@
  (class_reltype_dependency)
  (class_linetype_solid)
  (class_linetype_dotted)
+
+ "&"
  ] @operator
 
 (actor) @field
@@ -111,3 +118,37 @@
 
 (pie_label) @string
 (pie_value) @float
+
+[
+(flowchart_direction_lr)
+(flowchart_direction_rl)
+(flowchart_direction_tb)
+(flowchart_direction_bt)
+ ] @constant
+
+(flow_vertex_id) @field
+
+[
+ (flow_link_arrow)
+ (flow_link_arrow_start)
+ ] @operator
+
+(flow_link_arrowtext "|" @punctuation.bracket)
+
+(flow_vertex (flow_vertex_square        [ "[" "]" ]   @punctuation.bracket ))
+(flow_vertex (flow_vertex_circle        ["((" "))"]   @punctuation.bracket ))
+(flow_vertex (flow_vertex_ellipse       ["(-" "-)"]   @punctuation.bracket ))
+(flow_vertex (flow_vertex_stadium       ["([" "])"]   @punctuation.bracket ))
+(flow_vertex (flow_vertex_subroutine    ["[[" "]]"]   @punctuation.bracket ))
+(flow_vertex (flow_vertex_rect          ["[|" "|]"]   @punctuation.bracket ))
+(flow_vertex (flow_vertex_cylinder      ["[(" ")]"]   @punctuation.bracket ))
+(flow_vertex (flow_vertex_round         ["(" ")"]     @punctuation.bracket ))
+(flow_vertex (flow_vertex_diamond       ["{" "}"]     @punctuation.bracket ))
+(flow_vertex (flow_vertex_hexagon       ["{{" "}}"]   @punctuation.bracket ))
+(flow_vertex (flow_vertex_odd           [">" "]"]     @punctuation.bracket ))
+(flow_vertex (flow_vertex_trapezoid     ["[/" "\\]"]  @punctuation.bracket ))
+(flow_vertex (flow_vertex_inv_trapezoid ["[\\" "/]"]  @punctuation.bracket ))
+(flow_vertex (flow_vertex_leanright     ["[/" "/]"]   @punctuation.bracket ))
+(flow_vertex (flow_vertex_leanleft      ["[\\" "\\]"] @punctuation.bracket ))
+
+(flow_stmt_subgraph ["[" "]"] @punctuation.bracket )
