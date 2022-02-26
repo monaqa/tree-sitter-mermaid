@@ -23,6 +23,10 @@
         {
           "type": "SYMBOL",
           "name": "diagram_pie"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "diagram_flow"
         }
       ]
     },
@@ -866,7 +870,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "_subdocument"
+                "name": "_sequence_subdocument"
               },
               "named": true,
               "value": "sequence_stmt_loop_inner"
@@ -933,7 +937,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "_subdocument"
+                "name": "_sequence_subdocument"
               },
               "named": true,
               "value": "sequence_stmt_rect_inner"
@@ -1000,7 +1004,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "_subdocument"
+                "name": "_sequence_subdocument"
               },
               "named": true,
               "value": "sequence_stmt_opt_inner"
@@ -1028,7 +1032,7 @@
         }
       ]
     },
-    "_subdocument": {
+    "_sequence_subdocument": {
       "type": "REPEAT1",
       "content": {
         "type": "CHOICE",
@@ -1083,7 +1087,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "_subdocument"
+                "name": "_sequence_subdocument"
               },
               "named": true,
               "value": "sequence_stmt_alt_branch"
@@ -1113,7 +1117,7 @@
                     "type": "ALIAS",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "_subdocument"
+                      "name": "_sequence_subdocument"
                     },
                     "named": true,
                     "value": "sequence_stmt_alt_branch"
@@ -1180,7 +1184,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "_subdocument"
+                "name": "_sequence_subdocument"
               },
               "named": true,
               "value": "sequence_stmt_alt_branch"
@@ -1210,7 +1214,7 @@
                     "type": "ALIAS",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "_subdocument"
+                      "name": "_sequence_subdocument"
                     },
                     "named": true,
                     "value": "sequence_stmt_alt_branch"
@@ -2922,6 +2926,778 @@
         }
       ]
     },
+    "diagram_flow": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "directive"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[fF][lL][oO][wW][cC][hH][aA][rR][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "flowchart"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_flowchart_direction"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_newline"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_newline"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_flow_stmt"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "_newline"
+                      },
+                      {
+                        "type": "STRING",
+                        "value": ";"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_flow_stmt"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_newline"
+                },
+                {
+                  "type": "STRING",
+                  "value": ";"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_flowchart_direction": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "flowchart_direction_lr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flowchart_direction_rl"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flowchart_direction_tb"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flowchart_direction_bt"
+        }
+      ]
+    },
+    "_flow_stmt": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "flow_stmt_vertice"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_stmt_subgraph"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_stmt_direction"
+        }
+      ]
+    },
+    "flow_stmt_direction": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[dD][iI][rR][eE][cC][tT][iI][oO][nN]"
+              }
+            }
+          },
+          "named": false,
+          "value": "direction"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flowchart_direction"
+        }
+      ]
+    },
+    "flow_stmt_vertice": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "flow_node"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_flow_link"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "flow_node"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "flow_node": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "&"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "flow_vertex"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_flow_link": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "flow_link_simplelink"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_link_arrowtext"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_link_middletext"
+        }
+      ]
+    },
+    "flow_link_simplelink": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "flow_link_arrow"
+        }
+      ]
+    },
+    "flow_link_arrowtext": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "flow_link_arrow"
+        },
+        {
+          "type": "STRING",
+          "value": "|"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_arrow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "|"
+        }
+      ]
+    },
+    "flow_link_middletext": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "flow_link_arrow_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_arrow_text"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_link_arrow"
+        }
+      ]
+    },
+    "flow_arrow_text": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_alpha_num_token"
+      }
+    },
+    "flow_vertex_id": {
+      "type": "SYMBOL",
+      "name": "_alpha_num_token"
+    },
+    "flow_vertex": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_id"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_flow_vertex_kind"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_flow_vertex_kind": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_square"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_circle"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_ellipse"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_stadium"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_subroutine"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_rect"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_cylinder"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_round"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_diamond"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_hexagon"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_odd"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_trapezoid"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_inv_trapezoid"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_leanright"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_vertex_leanleft"
+        }
+      ]
+    },
+    "flow_vertex_square": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "flow_vertex_circle": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "(("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "))"
+        }
+      ]
+    },
+    "flow_vertex_ellipse": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "(-"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "-)"
+        }
+      ]
+    },
+    "flow_vertex_stadium": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "(["
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "])"
+        }
+      ]
+    },
+    "flow_vertex_subroutine": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "[["
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "]]"
+        }
+      ]
+    },
+    "flow_vertex_rect": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "[|"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "|]"
+        }
+      ]
+    },
+    "flow_vertex_cylinder": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "[("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": ")]"
+        }
+      ]
+    },
+    "flow_vertex_round": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "flow_vertex_diamond": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "flow_vertex_hexagon": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "}}"
+        }
+      ]
+    },
+    "flow_vertex_odd": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ">"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "flow_vertex_trapezoid": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "[/"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "\\]"
+        }
+      ]
+    },
+    "flow_vertex_inv_trapezoid": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "[\\"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "/]"
+        }
+      ]
+    },
+    "flow_vertex_leanright": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "[/"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "/]"
+        }
+      ]
+    },
+    "flow_vertex_leanleft": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "[\\"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_flow_text"
+        },
+        {
+          "type": "STRING",
+          "value": "\\]"
+        }
+      ]
+    },
+    "_flow_text": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "flow_text_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flow_text_quoted"
+        }
+      ]
+    },
+    "flow_stmt_subgraph": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "subgraph"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "flow_vertex_id"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "["
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "flow_vertex_text"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "]"
+                    }
+                  ]
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "flow_vertex_text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ";"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_newline"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "flow_stmt_subgraph_inner"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "end"
+        }
+      ]
+    },
+    "flow_stmt_subgraph_inner": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_flow_stmt"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              },
+              {
+                "type": "STRING",
+                "value": ";"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "flow_vertex_text": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_alpha_num_token"
+      }
+    },
     "_whitespace": {
       "type": "PATTERN",
       "value": "[ \\t]+"
@@ -3092,7 +3868,7 @@
     },
     "_alpha_num_token": {
       "type": "PATTERN",
-      "value": "[a-zA-Z0-9_~]+"
+      "value": "[a-zA-Z0-9_~!?]+"
     },
     "_bquote_string": {
       "type": "PATTERN",
@@ -3442,6 +4218,111 @@
     "pie_value": {
       "type": "PATTERN",
       "value": "[\\s]*[\\d]+(\\.[\\d]+)?"
+    },
+    "flowchart_direction_lr": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "LR"
+        },
+        {
+          "type": "STRING",
+          "value": "BR"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        }
+      ]
+    },
+    "flowchart_direction_rl": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "RL"
+        },
+        {
+          "type": "STRING",
+          "value": "<"
+        }
+      ]
+    },
+    "flowchart_direction_tb": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "TB"
+        },
+        {
+          "type": "STRING",
+          "value": "TD"
+        },
+        {
+          "type": "STRING",
+          "value": "v"
+        }
+      ]
+    },
+    "flowchart_direction_bt": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "BT"
+        },
+        {
+          "type": "STRING",
+          "value": "^"
+        }
+      ]
+    },
+    "flow_text_literal": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^-|}\\])\\s\\n;/\\\\]+"
+      }
+    },
+    "flow_text_quoted": {
+      "type": "PATTERN",
+      "value": "\"[^\"\\n]*\""
+    },
+    "flow_link_arrow": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[xo<]?--+[-xo>]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[xo<]?==+[=xo>]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[xo<]?-?\\.+-[xo>]"
+        }
+      ]
+    },
+    "flow_link_arrow_start": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[xo<]?--+"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[xo<]?==+"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[xo<]?-\\.+"
+        }
+      ]
     }
   },
   "extras": [
@@ -3462,10 +4343,13 @@
     "_sequence_stmt",
     "_class_stmt",
     "_state_stmt",
+    "_class_reltype",
+    "_class_linetype",
     "_gantt_stmt",
     "_pie_stmt",
-    "_class_reltype",
-    "_class_linetype"
+    "_flow_stmt",
+    "_flow_link",
+    "_flow_vertex_kind"
   ]
 }
 

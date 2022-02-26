@@ -58,6 +58,108 @@
     ]
   },
   {
+    "type": "_flow_link",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "flow_link_arrowtext",
+        "named": true
+      },
+      {
+        "type": "flow_link_middletext",
+        "named": true
+      },
+      {
+        "type": "flow_link_simplelink",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_flow_stmt",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "flow_stmt_direction",
+        "named": true
+      },
+      {
+        "type": "flow_stmt_subgraph",
+        "named": true
+      },
+      {
+        "type": "flow_stmt_vertice",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_flow_vertex_kind",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "flow_vertex_circle",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_cylinder",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_diamond",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_ellipse",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_hexagon",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_inv_trapezoid",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_leanleft",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_leanright",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_odd",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_rect",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_round",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_square",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_stadium",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_subroutine",
+        "named": true
+      },
+      {
+        "type": "flow_vertex_trapezoid",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "_gantt_stmt",
     "named": true,
     "subtypes": [
@@ -508,6 +610,41 @@
     }
   },
   {
+    "type": "diagram_flow",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_flow_stmt",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "flowchart_direction_bt",
+          "named": true
+        },
+        {
+          "type": "flowchart_direction_lr",
+          "named": true
+        },
+        {
+          "type": "flowchart_direction_rl",
+          "named": true
+        },
+        {
+          "type": "flowchart_direction_tb",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "diagram_gantt",
     "named": true,
     "fields": {},
@@ -616,6 +753,516 @@
   },
   {
     "type": "dotted_open_arrow",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flow_arrow_text",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flow_link_arrow",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flow_link_arrow_start",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flow_link_arrowtext",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_arrow_text",
+          "named": true
+        },
+        {
+          "type": "flow_link_arrow",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_link_middletext",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_arrow_text",
+          "named": true
+        },
+        {
+          "type": "flow_link_arrow",
+          "named": true
+        },
+        {
+          "type": "flow_link_arrow_start",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_link_simplelink",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_link_arrow",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_node",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_vertex",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_stmt_direction",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flowchart_direction_bt",
+          "named": true
+        },
+        {
+          "type": "flowchart_direction_lr",
+          "named": true
+        },
+        {
+          "type": "flowchart_direction_rl",
+          "named": true
+        },
+        {
+          "type": "flowchart_direction_tb",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_stmt_subgraph",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "flow_stmt_subgraph_inner",
+          "named": true
+        },
+        {
+          "type": "flow_vertex_id",
+          "named": true
+        },
+        {
+          "type": "flow_vertex_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_stmt_subgraph_inner",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_flow_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_stmt_vertice",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_flow_link",
+          "named": true
+        },
+        {
+          "type": "flow_node",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_text_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flow_vertex",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_flow_vertex_kind",
+          "named": true
+        },
+        {
+          "type": "flow_vertex_id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_circle",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_cylinder",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_diamond",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_ellipse",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_hexagon",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_id",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flow_vertex_inv_trapezoid",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_leanleft",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_leanright",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_odd",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_rect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_round",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_square",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_stadium",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_subroutine",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flow_vertex_text",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flow_vertex_trapezoid",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "flow_text_literal",
+          "named": true
+        },
+        {
+          "type": "flow_text_quoted",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flowchart_direction_bt",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flowchart_direction_lr",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flowchart_direction_rl",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flowchart_direction_tb",
     "named": true,
     "fields": {}
   },
@@ -1323,6 +1970,11 @@
     }
   },
   {
+    "type": "solid_point",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -1332,6 +1984,10 @@
       "types": [
         {
           "type": "diagram_class",
+          "named": true
+        },
+        {
+          "type": "diagram_flow",
           "named": true
         },
         {
@@ -1580,11 +2236,35 @@
     "named": false
   },
   {
+    "type": "&",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
   {
+    "type": "((",
+    "named": false
+  },
+  {
+    "type": "(-",
+    "named": false
+  },
+  {
+    "type": "([",
+    "named": false
+  },
+  {
     "type": ")",
+    "named": false
+  },
+  {
+    "type": "))",
+    "named": false
+  },
+  {
+    "type": ")]",
     "named": false
   },
   {
@@ -1604,6 +2284,10 @@
     "named": false
   },
   {
+    "type": "-)",
+    "named": false
+  },
+  {
     "type": "--",
     "named": false
   },
@@ -1612,11 +2296,19 @@
     "named": false
   },
   {
+    "type": "/]",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
   {
     "type": ":::",
+    "named": false
+  },
+  {
+    "type": ";",
     "named": false
   },
   {
@@ -1640,7 +2332,75 @@
     "named": false
   },
   {
+    "type": "BR",
+    "named": false
+  },
+  {
+    "type": "BT",
+    "named": false
+  },
+  {
+    "type": "LR",
+    "named": false
+  },
+  {
+    "type": "RL",
+    "named": false
+  },
+  {
+    "type": "TB",
+    "named": false
+  },
+  {
+    "type": "TD",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "[(",
+    "named": false
+  },
+  {
     "type": "[*]",
+    "named": false
+  },
+  {
+    "type": "[/",
+    "named": false
+  },
+  {
+    "type": "[[",
+    "named": false
+  },
+  {
+    "type": "[\\",
+    "named": false
+  },
+  {
+    "type": "[|",
+    "named": false
+  },
+  {
+    "type": "\\]",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "])",
+    "named": false
+  },
+  {
+    "type": "]]",
+    "named": false
+  },
+  {
+    "type": "^",
     "named": false
   },
   {
@@ -1748,6 +2508,10 @@
     "named": false
   },
   {
+    "type": "direction",
+    "named": false
+  },
+  {
     "type": "direction bt",
     "named": false
   },
@@ -1785,6 +2549,14 @@
   },
   {
     "type": "excludes",
+    "named": false
+  },
+  {
+    "type": "flow_text_quoted",
+    "named": true
+  },
+  {
+    "type": "flowchart",
     "named": false
   },
   {
@@ -1896,10 +2668,6 @@
     "named": true
   },
   {
-    "type": "solid_point",
-    "named": true
-  },
-  {
     "type": "state ",
     "named": false
   },
@@ -1914,6 +2682,10 @@
   {
     "type": "state_id",
     "named": true
+  },
+  {
+    "type": "subgraph",
+    "named": false
   },
   {
     "type": "title",
@@ -1932,11 +2704,27 @@
     "named": true
   },
   {
+    "type": "v",
+    "named": false
+  },
+  {
     "type": "{",
     "named": false
   },
   {
+    "type": "{{",
+    "named": false
+  },
+  {
+    "type": "|",
+    "named": false
+  },
+  {
     "type": "|>",
+    "named": false
+  },
+  {
+    "type": "|]",
     "named": false
   },
   {
@@ -1945,6 +2733,10 @@
   },
   {
     "type": "}%%",
+    "named": false
+  },
+  {
+    "type": "}}",
     "named": false
   },
   {
