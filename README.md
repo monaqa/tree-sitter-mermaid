@@ -9,11 +9,11 @@ There may be unsupported grammars for some types, even if they are marked as com
 - [x] Class
 - [ ] Er
 - [ ] Flowchart
-- [ ] Gantt
+- [x] Gantt
 - [ ] Git
 - [ ] Info
 - [ ] Pie
 - [ ] Requirement
 - [x] Sequence
-- [ ] State
+- [x] State
 - [ ] User-Journey

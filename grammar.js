@@ -1,9 +1,16 @@
 const tokens = {
     _whitespace: /[ \t]+/,
+    _newline: /(\n)+/,
     comment: /%%([^\{].*)?\n/,
+
     type_directive: /[^\}:.][^:.]*/,
     arg_directive: /([^\}:.]|\n)([^:.]|\n)*/,
-    _newline: /(\n)+/,
+
+    direction_tb: kwd("direction tb"),
+    direction_bt: kwd("direction bt"),
+    direction_rl: kwd("direction rl"),
+    direction_lr: kwd("direction lr"),
+
     // rest: /(?:[:]?(?:no)?wrap:)?[^#\n;]*/,
     _rest_text: /[^#\n;]+/,
     // tree-sitter doesn't support negative lookahead
@@ -35,6 +42,33 @@ const tokens = {
     class_linetype_solid: "--",
     class_linetype_dotted: "..",
     class_label: /[^:\n;]+/,
+
+    state_name: choice(
+        "[*]",  // initial/final state
+        /[_a-zA-Z0-9]+/
+    ),
+    state_arrow: "-->",
+    state_description: /[^:\n;]+/,
+    state_hide_empty_description: kwd("hide empty description"),
+    state_id: /[^:\n\s\-\{]+/,
+    state_division: "--",
+    state_annotation_fork: choice(
+        token.immediate(seq("<<", kwd("fork"), ">>")),
+        token.immediate(seq("[[", kwd("fork"), "]]")),
+    ),
+    state_annotation_join: choice(
+        token.immediate(seq("<<", kwd("join"), ">>")),
+        token.immediate(seq("[[", kwd("join"), "]]")),
+    ),
+    state_annotation_choice: choice(
+        token.immediate(seq("<<", kwd("choice"), ">>")),
+        token.immediate(seq("[[", kwd("choice"), "]]")),
+    ),
+
+    gantt_meta_format: /[^#\n;]+/,
+    // gantt_task_text: /[^#:\n;]+/,
+    gantt_task_text: repeat1(/[^#:\n;\s]+/),
+    gantt_task_data: /[^#:\n;]+/,
 }
 
 function kwd(word) {
@@ -86,6 +120,8 @@ module.exports = grammar({
         source_file: $ => choice(
             $.diagram_sequence,
             $.diagram_class,
+            $.diagram_state,
+            $.diagram_gantt,
         ),
 
         directive: $ => seq(
@@ -95,7 +131,14 @@ module.exports = grammar({
             "}%%"
         ),
 
-        /// sequence
+        _direction: $ => choice(
+            $.direction_tb,
+            $.direction_bt,
+            $.direction_rl,
+            $.direction_lr,
+        ),
+
+        /// sequence diagram
         diagram_sequence: $ => seq(
             repeat(choice($.directive, $._newline)),
             kwd("sequenceDiagram"), repeat(choice($._sequence_stmt, $._newline))
@@ -153,7 +196,7 @@ module.exports = grammar({
         sequence_stmt_deactivate: $ => seq(kwd("deactivate"), $.actor, $._newline),
 
         sequence_stmt_note: $ => seq(
-            kwd("note"),
+            kwd("note "),
             choice(
                 seq( $.note_placement, $.actor),
                 seq( kwd("over"), $.actor, optional(seq(",", $.actor))),
@@ -303,6 +346,143 @@ module.exports = grammar({
         ),
         // class_stmt_click: $ => seq(),
         // class_stmt_css: $ => seq(),
+
+        /// state diagram
+        diagram_state: $ => seq(
+            repeat(choice($.directive, $._newline)),
+            choice(kwd("stateDiagram"), kwd("stateDiagram-v2")),
+            optional($._newline),
+            sep($._state_stmt, $._newline),
+            optional($._newline),
+        ),
+        _state_stmt: $ => choice(
+            // s1
+            // s1: foo
+            // state "foo" as s1
+            $.state_stmt_simple,
+
+            // s1 --> s2
+            $.state_stmt_arrow,
+
+            // state s1 { ... }
+            $.state_stmt_composite,
+
+            // state s1 <<join>>
+            $.state_stmt_annotation,
+            $.state_stmt_hide_empty_description,
+            $.state_division,
+            $.state_note,
+            $._direction,
+        ),
+
+        state_stmt_simple: $ => choice(
+            seq( $.state_name, optseq(":", $.state_description)),
+            seq( kwd("state "), $.state_alias),
+        ),
+
+        state_stmt_arrow: $ => seq(
+            $.state_name,
+            $.state_arrow,
+            $.state_name,
+            optseq(":", $.state_description),
+        ),
+
+        state_stmt_composite: $ => seq(
+            kwd("state "),
+            choice($.state_name, $.state_alias),
+            optseq(kwd("as"), $.state_id),
+            $.state_composite_body,
+        ),
+        state_composite_body: $ => seq(
+            "{",
+            optional($._newline),
+            sep($._state_stmt, optional($._newline)),
+            optional($._newline),
+            "}",
+        ),
+
+        state_stmt_annotation: $ => seq(
+            kwd("state "),
+            $.state_name,
+            $._state_annotation,
+        ),
+
+        state_alias: $ => seq(
+            alias($._dquote_string, $.state_description),
+            kwd("as"), $.state_id,
+        ),
+
+        state_stmt_hide_empty_description: $ => $.state_hide_empty_description,
+
+        _state_annotation: $ => choice(
+            $.state_annotation_fork,
+            $.state_annotation_join,
+            $.state_annotation_choice,
+        ),
+
+        state_note: $ => seq(
+            kwd("note "),
+            $.note_placement,
+            $.state_name,
+            choice(
+                seq( ":", optional(alias($.state_description, $.note_content))),
+                // seq($._newline, alias(repeat(seq(/[^\n]+/, $._newline)), $.note_content), optional(/\s+/), kwd("end note"))
+            ),
+        ),
+
+        /// Gantt chart
+        diagram_gantt: $ => seq(
+            repeat(choice($.directive, $._newline)),
+            kwd("gantt"), $._newline,
+            repeat(choice($._gantt_stmt, $._newline))
+        ),
+
+        _gantt_stmt: $ => choice(
+            $.gantt_stmt_dateformat,
+            $.gantt_stmt_inclusiveenddates,
+            $.gantt_stmt_topaxis,
+            $.gantt_stmt_axisformat,
+            $.gantt_stmt_includes,
+            $.gantt_stmt_excludes,
+            $.gantt_stmt_todaymarker,
+            $.gantt_stmt_title,
+            $.gantt_stmt_section,
+            $.gantt_stmt_task,
+            // $.gantt_stmt_click,
+            $.directive,
+        ),
+
+        gantt_stmt_dateformat: $ => seq(
+            kwd("dateformat"), alias($.gantt_meta_format, $.gantt_date_format),
+        ),
+        gantt_stmt_inclusiveenddates: $ => seq(
+            kwd("inclusiveenddates"), alias($.gantt_meta_format, $.gantt_end_dates),
+        ),
+        gantt_stmt_topaxis: $ => seq(
+            kwd("topaxis"), alias($.gantt_meta_format, $.gantt_top_axis),
+        ),
+        gantt_stmt_axisformat: $ => seq(
+            kwd("axisformat"), alias($.gantt_meta_format, $.gantt_axis_format),
+        ),
+        gantt_stmt_includes: $ => seq(
+            kwd("includes"), alias($.gantt_meta_format, $.gantt_includes),
+        ),
+        gantt_stmt_excludes: $ => seq(
+            kwd("excludes"), alias($.gantt_meta_format, $.gantt_excludes),
+        ),
+        gantt_stmt_todaymarker: $ => seq(
+            kwd("todaymarker"), alias($.gantt_meta_format, $.gantt_today_marker),
+        ),
+        gantt_stmt_title: $ => seq(
+            kwd("title"), alias($.gantt_meta_format, $.gantt_title),
+        ),
+        gantt_stmt_section: $ => seq(
+            kwd("section"), alias($.gantt_meta_format, $.gantt_section),
+        ),
+
+        gantt_stmt_task: $ => seq(
+            $.gantt_task_text, ":", $.gantt_task_data,
+        ),
 
         ... tokensFunc
     }
