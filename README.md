@@ -7,13 +7,13 @@
 There may be unsupported grammars for some types, even if they are marked as completed.
 
 - [x] Class
-- [ ] Er
+- [x] Er
 - [x] Flowchart
 - [x] Gantt
-- [ ] Git
-- [ ] Info
 - [x] Pie
-- [ ] Requirement
 - [x] Sequence
 - [x] State
+- [ ] Requirement
 - [ ] User-Journey
+- [ ] Git
+- [ ] Info

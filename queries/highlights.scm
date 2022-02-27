@@ -7,6 +7,7 @@
  "gantt"
  "pie"
  "flowchart"
+ "erdiagram"
 
  "participant"
  "as"
@@ -86,14 +87,15 @@
  (dotted_cross)
  (solid_point)
  (dotted_point)
+ ] @operator
 
+[
  (class_reltype_aggregation)
  (class_reltype_extension)
  (class_reltype_composition)
  (class_reltype_dependency)
  (class_linetype_solid)
  (class_linetype_dotted)
-
  "&"
  ] @operator
 
@@ -135,20 +137,41 @@
 
 (flow_link_arrowtext "|" @punctuation.bracket)
 
-(flow_vertex (flow_vertex_square        [ "[" "]" ]   @punctuation.bracket ))
-(flow_vertex (flow_vertex_circle        ["((" "))"]   @punctuation.bracket ))
-(flow_vertex (flow_vertex_ellipse       ["(-" "-)"]   @punctuation.bracket ))
-(flow_vertex (flow_vertex_stadium       ["([" "])"]   @punctuation.bracket ))
-(flow_vertex (flow_vertex_subroutine    ["[[" "]]"]   @punctuation.bracket ))
-(flow_vertex (flow_vertex_rect          ["[|" "|]"]   @punctuation.bracket ))
-(flow_vertex (flow_vertex_cylinder      ["[(" ")]"]   @punctuation.bracket ))
-(flow_vertex (flow_vertex_round         ["(" ")"]     @punctuation.bracket ))
-(flow_vertex (flow_vertex_diamond       ["{" "}"]     @punctuation.bracket ))
-(flow_vertex (flow_vertex_hexagon       ["{{" "}}"]   @punctuation.bracket ))
-(flow_vertex (flow_vertex_odd           [">" "]"]     @punctuation.bracket ))
-(flow_vertex (flow_vertex_trapezoid     ["[/" "\\]"]  @punctuation.bracket ))
-(flow_vertex (flow_vertex_inv_trapezoid ["[\\" "/]"]  @punctuation.bracket ))
-(flow_vertex (flow_vertex_leanright     ["[/" "/]"]   @punctuation.bracket ))
-(flow_vertex (flow_vertex_leanleft      ["[\\" "\\]"] @punctuation.bracket ))
+(flow_vertex_square        [ "[" "]" ]   @punctuation.bracket )
+(flow_vertex_circle        ["((" "))"]   @punctuation.bracket )
+(flow_vertex_ellipse       ["(-" "-)"]   @punctuation.bracket )
+(flow_vertex_stadium       ["([" "])"]   @punctuation.bracket )
+(flow_vertex_subroutine    ["[[" "]]"]   @punctuation.bracket )
+(flow_vertex_rect          ["[|" "|]"]   @punctuation.bracket )
+(flow_vertex_cylinder      ["[(" ")]"]   @punctuation.bracket )
+(flow_vertex_round         ["(" ")"]     @punctuation.bracket )
+(flow_vertex_diamond       ["{" "}"]     @punctuation.bracket )
+(flow_vertex_hexagon       ["{{" "}}"]   @punctuation.bracket )
+(flow_vertex_odd           [">" "]"]     @punctuation.bracket )
+(flow_vertex_trapezoid     ["[/" "\\]"]  @punctuation.bracket )
+(flow_vertex_inv_trapezoid ["[\\" "/]"]  @punctuation.bracket )
+(flow_vertex_leanright     ["[/" "/]"]   @punctuation.bracket )
+(flow_vertex_leanleft      ["[\\" "\\]"] @punctuation.bracket )
 
 (flow_stmt_subgraph ["[" "]"] @punctuation.bracket )
+
+[
+ (er_cardinarity_zero_or_one)
+ (er_cardinarity_zero_or_more)
+ (er_cardinarity_one_or_more)
+ (er_cardinarity_only_one)
+ (er_reltype_non_identifying)
+ (er_reltype_identifying)
+ ] @operator
+
+(er_entity_name) @field
+
+(er_attribute_type) @type
+(er_attribute_name) @field
+
+[
+ (er_attribute_key_type_pk)
+ (er_attribute_key_type_fk)
+ ] @keyword
+
+(er_attribute_comment) @string
