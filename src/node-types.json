@@ -401,6 +401,11 @@
     "fields": {}
   },
   {
+    "type": "class_linetype_dotted",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "class_linetype_solid",
     "named": true,
     "fields": {}
@@ -610,6 +615,33 @@
     }
   },
   {
+    "type": "diagram_er",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "er_stmt_entity",
+          "named": true
+        },
+        {
+          "type": "er_stmt_entity_block",
+          "named": true
+        },
+        {
+          "type": "er_stmt_entity_relation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "diagram_flow",
     "named": true,
     "fields": {},
@@ -755,6 +787,204 @@
     "type": "dotted_open_arrow",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "er_attribute",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "er_attribute_comment",
+          "named": true
+        },
+        {
+          "type": "er_attribute_key_type_fk",
+          "named": true
+        },
+        {
+          "type": "er_attribute_key_type_pk",
+          "named": true
+        },
+        {
+          "type": "er_attribute_name",
+          "named": true
+        },
+        {
+          "type": "er_attribute_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "er_attribute_comment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_attribute_key_type_fk",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_attribute_key_type_pk",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_attribute_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_attribute_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_cardinarity_one_or_more",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_cardinarity_zero_or_more",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_cardinarity_zero_or_one",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_entity_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_relation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "er_cardinarity_one_or_more",
+          "named": true
+        },
+        {
+          "type": "er_cardinarity_only_one",
+          "named": true
+        },
+        {
+          "type": "er_cardinarity_zero_or_more",
+          "named": true
+        },
+        {
+          "type": "er_cardinarity_zero_or_one",
+          "named": true
+        },
+        {
+          "type": "er_reltype_identifying",
+          "named": true
+        },
+        {
+          "type": "er_reltype_non_identifying",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "er_reltype_identifying",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_reltype_non_identifying",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_role",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "er_stmt_entity",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "er_entity_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "er_stmt_entity_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "er_entity_name",
+          "named": true
+        },
+        {
+          "type": "er_stmt_entity_block_inner",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "er_stmt_entity_block_inner",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "er_attribute",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "er_stmt_entity_relation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "er_entity_name",
+          "named": true
+        },
+        {
+          "type": "er_relation",
+          "named": true
+        },
+        {
+          "type": "er_role",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "flow_arrow_text",
@@ -1505,6 +1735,11 @@
     "fields": {}
   },
   {
+    "type": "pie_label",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "pie_showdata",
     "named": true,
     "fields": {}
@@ -1987,6 +2222,10 @@
           "named": true
         },
         {
+          "type": "diagram_er",
+          "named": true
+        },
+        {
           "type": "diagram_flow",
           "named": true
         },
@@ -2296,6 +2535,18 @@
     "named": false
   },
   {
+    "type": "-.",
+    "named": false
+  },
+  {
+    "type": ".-",
+    "named": false
+  },
+  {
+    "type": "..",
+    "named": false
+  },
+  {
     "type": "/]",
     "named": false
   },
@@ -2329,30 +2580,6 @@
   },
   {
     "type": ">>",
-    "named": false
-  },
-  {
-    "type": "BR",
-    "named": false
-  },
-  {
-    "type": "BT",
-    "named": false
-  },
-  {
-    "type": "LR",
-    "named": false
-  },
-  {
-    "type": "RL",
-    "named": false
-  },
-  {
-    "type": "TB",
-    "named": false
-  },
-  {
-    "type": "TD",
     "named": false
   },
   {
@@ -2440,6 +2667,14 @@
     "named": false
   },
   {
+    "type": "br",
+    "named": false
+  },
+  {
+    "type": "bt",
+    "named": false
+  },
+  {
     "type": "cardinality",
     "named": true
   },
@@ -2461,10 +2696,6 @@
   },
   {
     "type": "class_classifier_static",
-    "named": true
-  },
-  {
-    "type": "class_linetype_dotted",
     "named": true
   },
   {
@@ -2548,7 +2779,19 @@
     "named": false
   },
   {
+    "type": "er_cardinarity_only_one",
+    "named": true
+  },
+  {
+    "type": "erdiagram",
+    "named": false
+  },
+  {
     "type": "excludes",
+    "named": false
+  },
+  {
+    "type": "fk",
     "named": false
   },
   {
@@ -2596,6 +2839,10 @@
     "named": false
   },
   {
+    "type": "lr",
+    "named": false
+  },
+  {
     "type": "note ",
     "named": false
   },
@@ -2605,6 +2852,14 @@
   },
   {
     "type": "over",
+    "named": false
+  },
+  {
+    "type": "o{",
+    "named": false
+  },
+  {
+    "type": "o|",
     "named": false
   },
   {
@@ -2620,16 +2875,16 @@
     "named": false
   },
   {
-    "type": "pie_label",
-    "named": true
-  },
-  {
     "type": "pie_title",
     "named": true
   },
   {
     "type": "pie_value",
     "named": true
+  },
+  {
+    "type": "pk",
+    "named": false
   },
   {
     "type": "properties",
@@ -2641,6 +2896,10 @@
   },
   {
     "type": "right of",
+    "named": false
+  },
+  {
+    "type": "rl",
     "named": false
   },
   {
@@ -2688,6 +2947,14 @@
     "named": false
   },
   {
+    "type": "tb",
+    "named": false
+  },
+  {
+    "type": "td",
+    "named": false
+  },
+  {
     "type": "title",
     "named": false
   },
@@ -2728,11 +2995,27 @@
     "named": false
   },
   {
+    "type": "|o",
+    "named": false
+  },
+  {
+    "type": "|{",
+    "named": false
+  },
+  {
     "type": "}",
     "named": false
   },
   {
     "type": "}%%",
+    "named": false
+  },
+  {
+    "type": "}o",
+    "named": false
+  },
+  {
+    "type": "}|",
     "named": false
   },
   {

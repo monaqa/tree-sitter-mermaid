@@ -75,10 +75,10 @@ const tokens = {
     pie_label: /"[^"]*"/,
     pie_value: /[\s]*[\d]+(\.[\d]+)?/,
 
-    flowchart_direction_lr: choice("LR", "BR", ">"),
-    flowchart_direction_rl: choice("RL", "<"),
-    flowchart_direction_tb: choice("TB", "TD", "v"),
-    flowchart_direction_bt: choice("BT", "^"),
+    flowchart_direction_lr: choice(kwd("lr"), kwd("br"), ">"),
+    flowchart_direction_rl: choice(kwd("rl"), "<"),
+    flowchart_direction_tb: choice(kwd("tb"), kwd("td"), "v"),
+    flowchart_direction_bt: choice(kwd("bt"), "^"),
 
     flow_text_literal: repeat1(/[^-|}\])\s\n;/\\]+/),
     flow_text_quoted: (/"[^"\n]*"/),
@@ -94,6 +94,19 @@ const tokens = {
         /[xo<]?==+/,
         /[xo<]?-\.+/,
     ),
+
+    _er_word: /"[^"]*"/,
+    _er_alphanum: /[A-Za-z][A-Za-z0-9\-_]*/,
+
+    er_cardinarity_zero_or_one: choice("|o", "o|"),
+    er_cardinarity_zero_or_more: choice("}o", "o{"),
+    er_cardinarity_one_or_more: choice("}|", "|{"),
+    er_cardinarity_only_one: "||",
+    er_reltype_non_identifying: choice("..", ".-", "-."),
+    er_reltype_identifying: "--",
+
+    er_attribute_key_type_pk: kwd("pk"),
+    er_attribute_key_type_fk: kwd("fk"),
 }
 
 function kwd(word) {
@@ -156,6 +169,7 @@ module.exports = grammar({
             $.diagram_gantt,
             $.diagram_pie,
             $.diagram_flow,
+            $.diagram_er,
         ),
 
         directive: $ => seq(
@@ -647,6 +661,76 @@ module.exports = grammar({
         ),
         flow_stmt_subgraph_inner: $ => repeat1(seq($._flow_stmt, choice($._newline, ";"))),
         flow_vertex_text: $ => repeat1($._alpha_num_token),
+
+        /// ER diagram
+        diagram_er: $ => seq(
+            repeat(choice($.directive, $._newline)),
+            kwd("erdiagram"),
+            optional($._newline),
+            sep($._er_stmt, $._newline),
+            optional($._newline),
+        ),
+
+        _er_stmt: $ => choice(
+            $.er_stmt_entity,
+            $.er_stmt_entity_relation,
+            $.er_stmt_entity_block,
+            $.directive,
+        ),
+
+        er_stmt_entity: $ => $.er_entity_name,
+
+        er_stmt_entity_relation: $ => seq(
+            $.er_entity_name,
+            $.er_relation,
+            $.er_entity_name,
+            ":", $.er_role,
+        ),
+        er_entity_name: $ => $._er_alphanum,
+        er_relation: $ => seq(
+            $._er_cardinarity,
+            $._er_reltype,
+            $._er_cardinarity,
+        ),
+        _er_cardinarity: $ => choice(
+            $.er_cardinarity_zero_or_one,
+            $.er_cardinarity_zero_or_more,
+            $.er_cardinarity_one_or_more,
+            $.er_cardinarity_only_one,
+        ),
+        _er_reltype: $ => choice(
+            $.er_reltype_non_identifying,
+            $.er_reltype_identifying,
+        ),
+        er_role: $ => choice( $._er_word, $._er_alphanum,),
+
+        er_stmt_entity_block: $ => seq(
+            $.er_entity_name,
+            "{",
+            $._newline,
+            optional($.er_stmt_entity_block_inner),
+            "}"
+        ),
+
+        er_stmt_entity_block_inner: $ => repeat1($.er_attribute),
+
+        er_attribute: $ => seq(
+            $.er_attribute_type,
+            $.er_attribute_name,
+            optional($._er_attribute_key_type),
+            optional($.er_attribute_comment),
+            $._newline,
+        ),
+
+        er_attribute_type: $ => $._er_alphanum,
+        er_attribute_name: $ => $._er_alphanum,
+
+        _er_attribute_key_type: $ => choice(
+            $.er_attribute_key_type_pk,
+            $.er_attribute_key_type_fk,
+        ),
+
+        er_attribute_comment: $ => $._er_word,
 
         ... tokensFunc
     }
