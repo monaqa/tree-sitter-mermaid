@@ -356,16 +356,6 @@
     ]
   },
   {
-    "type": "actor",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "alias",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "class_annotation_line",
     "named": true,
     "fields": {},
@@ -1706,25 +1696,6 @@
     "fields": {}
   },
   {
-    "type": "note_placement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "note_placement_left",
-          "named": true
-        },
-        {
-          "type": "note_placement_right",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "note_placement_left",
     "named": true,
     "fields": {}
@@ -1779,7 +1750,17 @@
     }
   },
   {
-    "type": "sequence_stmt_activate",
+    "type": "sequence_actor",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "sequence_alias",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "sequence_note_placement",
     "named": true,
     "fields": {},
     "children": {
@@ -1787,382 +1768,28 @@
       "required": true,
       "types": [
         {
-          "type": "actor",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_actor",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
+          "type": "note_placement_left",
           "named": true
         },
         {
-          "type": "alias",
+          "type": "note_placement_right",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "sequence_stmt_alt",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "sequence_stmt_alt_branch",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_alt_branch",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "_sequence_stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_autonumber",
+    "type": "sequence_signal_minus_sign",
     "named": true,
     "fields": {}
   },
   {
-    "type": "sequence_stmt_deactivate",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_details",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_link",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_links",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_loop",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "sequence_stmt_loop_inner",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_loop_inner",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "_sequence_stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_note",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "note_placement",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_opt",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "sequence_stmt_opt_inner",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_opt_inner",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "_sequence_stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_par",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "sequence_stmt_alt_branch",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_participant",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "alias",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_properties",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_rect",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "sequence_stmt_rect_inner",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_rect_inner",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "_sequence_stmt",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_signal",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "actor",
-          "named": true
-        },
-        {
-          "type": "signal_minus_sign",
-          "named": true
-        },
-        {
-          "type": "signal_plus_sign",
-          "named": true
-        },
-        {
-          "type": "signal_type",
-          "named": true
-        },
-        {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "sequence_stmt_title",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "title",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "signal_minus_sign",
+    "type": "sequence_signal_plus_sign",
     "named": true,
     "fields": {}
   },
   {
-    "type": "signal_plus_sign",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "signal_type",
+    "type": "sequence_signal_type",
     "named": true,
     "fields": {},
     "children": {
@@ -2203,6 +1830,384 @@
         }
       ]
     }
+  },
+  {
+    "type": "sequence_stmt_activate",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_actor",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_actor",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_actor",
+          "named": true
+        },
+        {
+          "type": "sequence_alias",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_alt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_stmt_alt_branch",
+          "named": true
+        },
+        {
+          "type": "sequence_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_alt_branch",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_sequence_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_autonumber",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "sequence_stmt_deactivate",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_actor",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_details",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_actor",
+          "named": true
+        },
+        {
+          "type": "sequence_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_link",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_actor",
+          "named": true
+        },
+        {
+          "type": "sequence_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_links",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_actor",
+          "named": true
+        },
+        {
+          "type": "sequence_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_loop",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_stmt_loop_inner",
+          "named": true
+        },
+        {
+          "type": "sequence_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_loop_inner",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_sequence_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_note",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_actor",
+          "named": true
+        },
+        {
+          "type": "sequence_note_placement",
+          "named": true
+        },
+        {
+          "type": "sequence_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_opt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_stmt_opt_inner",
+          "named": true
+        },
+        {
+          "type": "sequence_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_opt_inner",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_sequence_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_par",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_stmt_alt_branch",
+          "named": true
+        },
+        {
+          "type": "sequence_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_participant",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_actor",
+          "named": true
+        },
+        {
+          "type": "sequence_alias",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_properties",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_actor",
+          "named": true
+        },
+        {
+          "type": "sequence_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_rect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_stmt_rect_inner",
+          "named": true
+        },
+        {
+          "type": "sequence_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_rect_inner",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_sequence_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_signal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sequence_actor",
+          "named": true
+        },
+        {
+          "type": "sequence_signal_minus_sign",
+          "named": true
+        },
+        {
+          "type": "sequence_signal_plus_sign",
+          "named": true
+        },
+        {
+          "type": "sequence_signal_type",
+          "named": true
+        },
+        {
+          "type": "sequence_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_stmt_title",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "title",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sequence_text",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "solid_point",
@@ -2335,11 +2340,30 @@
           "named": true
         },
         {
-          "type": "note_placement",
+          "type": "state_name",
           "named": true
         },
         {
-          "type": "state_name",
+          "type": "state_note_placement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_note_placement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "note_placement_left",
+          "named": true
+        },
+        {
+          "type": "note_placement_right",
           "named": true
         }
       ]
@@ -2459,11 +2483,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "text",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "title",
@@ -2632,10 +2651,6 @@
   },
   {
     "type": "activate",
-    "named": false
-  },
-  {
-    "type": "actor",
     "named": false
   },
   {
@@ -2908,6 +2923,10 @@
   },
   {
     "type": "sequenceDiagram",
+    "named": false
+  },
+  {
+    "type": "sequence_actor",
     "named": false
   },
   {

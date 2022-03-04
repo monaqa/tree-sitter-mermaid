@@ -1,4 +1,5 @@
 const tokens = {
+    /// common tokens
     _whitespace: /[ \t]+/,
     _newline: /(\n)+/,
     comment: /%%([^\{].*)?\n/,
@@ -6,17 +7,18 @@ const tokens = {
     type_directive: /[^\}:.][^:.]*/,
     arg_directive: /([^\}:.]|\n)([^:.]|\n)*/,
 
+    /// tokens in
     direction_tb: kwd("direction tb"),
     direction_bt: kwd("direction bt"),
     direction_rl: kwd("direction rl"),
     direction_lr: kwd("direction lr"),
 
     // rest: /(?:[:]?(?:no)?wrap:)?[^#\n;]*/,
-    _rest_text: /[^#\n;]+/,
+    _sequence_rest_text: /[^#\n;]+/,
     // tree-sitter doesn't support negative lookahead
     // TODO: Replicate more precise rule
-    // actor: /[^\+\->:\n,;]+((?!(\-x|\-\-x|\-\)|\-\-\)))[\-]*[^\+\->:\n,;]+)*/,
-    _actor_word: /[^ \+\->:\n,;]+/,
+    // sequence_actor: /[^\+\->:\n,;]+((?!(\-x|\-\-x|\-\)|\-\-\)))[\-]*[^\+\->:\n,;]+)*/,
+    _sequence_actor_word: /[^ \+\->:\n,;]+/,
     solid_arrow: "->>",
     dotted_arrow: "-->>",
     solid_open_arrow: "->",
@@ -25,11 +27,12 @@ const tokens = {
     dotted_cross: "--x",
     solid_point: "-)",
     dotted_point: "--)",
-    signal_plus_sign: "+",
-    signal_minus_sign: "-",
+    sequence_signal_plus_sign: "+",
+    sequence_signal_minus_sign: "-",
     note_placement_left: kwd("left of"),
     note_placement_right: kwd("right of"),
 
+    /// tokens in class diagram
     _class_name: /[a-zA-Z0-9_]+/,
     _alpha_num_token: /[a-zA-Z0-9_~!?]+/,
     _bquote_string: /`[^`]+`/,
@@ -43,6 +46,7 @@ const tokens = {
     class_linetype_dotted: "..",
     class_label: /[^:\n;]+/,
 
+    /// tokens in state diagram
     state_name: choice(
         "[*]",  // initial/final state
         /[_a-zA-Z0-9]+/
@@ -65,16 +69,19 @@ const tokens = {
         token.immediate(seq("[[", kwd("choice"), "]]")),
     ),
 
+    /// tokens in Gantt chart
     gantt_meta_format: /[^#\n;]+/,
     // gantt_task_text: /[^#:\n;]+/,
     gantt_task_text: repeat1(/[^#:\n;\s]+/),
     gantt_task_data: /[^#:\n;]+/,
 
+    /// tokens in pie chart
     pie_showdata: kwd("showdata"),
     pie_title: /[^\n;#]+/,
     pie_label: /"[^"]*"/,
     pie_value: /[\s]*[\d]+(\.[\d]+)?/,
 
+    /// tokens in flow chart
     flowchart_direction_lr: choice(kwd("lr"), kwd("br"), ">"),
     flowchart_direction_rl: choice(kwd("rl"), "<"),
     flowchart_direction_tb: choice(kwd("tb"), kwd("td"), "v"),
@@ -95,6 +102,7 @@ const tokens = {
         /[xo<]?-\.+/,
     ),
 
+    /// tokens in ER diagram
     _er_word: /"[^"]*"/,
     _er_alphanum: /[A-Za-z][A-Za-z0-9\-_]*/,
 
@@ -109,35 +117,14 @@ const tokens = {
     er_attribute_key_type_fk: kwd("fk"),
 }
 
-function kwd(word) {
-    return alias(reserved(caseInsensitive(word)), word)
-}
-
-function reserved(regex) {
-    return token(prec(1, new RegExp(regex)))
-}
-
-function caseInsensitive(word) {
-    return word.split('')
-        .map(letter => `[${letter}${letter.toUpperCase()}]`)
-        .join('')
-}
-
-function optseq(...args) {
-    return optional(seq(...args))
-}
-
 const tokensFunc = Object.fromEntries(
     Object.entries(tokens).map(
       ([k, v]) => [k, (_) => v]
     )
   )
 
-function sep(rule, delimiter) {
-  return seq(rule, repeat(seq(delimiter, rule)));
-}
-
 module.exports = grammar({
+    /// meta information
     name: 'mermaid',
 
     extras: $ => [
@@ -214,21 +201,21 @@ module.exports = grammar({
         ),
 
         sequence_stmt_participant: $ => seq(
-            kwd("participant"), $.actor, optional(seq(kwd("as"), alias($._rest_text, $.alias))),
+            kwd("participant"), $.sequence_actor, optional(seq(kwd("as"), alias($._sequence_rest_text, $.sequence_alias))),
             $._newline,
         ),
-        sequence_stmt_actor: $ => seq(kwd("actor"), $.actor, optional(seq(kwd("as"), alias($._rest_text, $.alias))), $._newline),
-        actor: $ => repeat1($._actor_word),
+        sequence_stmt_actor: $ => seq(kwd("sequence_actor"), $.sequence_actor, optional(seq(kwd("as"), alias($._sequence_rest_text, $.sequence_alias))), $._newline),
+        sequence_actor: $ => repeat1($._sequence_actor_word),
 
         sequence_stmt_signal: $ => seq(
-            $.actor,
-            $.signal_type,
-            optional(choice($.signal_plus_sign, $.signal_minus_sign)),
-            $.actor,
-            ":", alias($._rest_text, $.text),
+            $.sequence_actor,
+            $.sequence_signal_type,
+            optional(choice($.sequence_signal_plus_sign, $.sequence_signal_minus_sign)),
+            $.sequence_actor,
+            ":", $.sequence_text,
             $._newline,
         ),
-        signal_type: $ => choice(
+        sequence_signal_type: $ => choice(
             $.solid_arrow,
             $.dotted_arrow,
             $.solid_open_arrow,
@@ -238,55 +225,56 @@ module.exports = grammar({
             $.solid_point,
             $.dotted_point,
         ),
+        sequence_text: $ => $._sequence_rest_text,
 
         sequence_stmt_autonumber: _ => kwd("autonumber"),
-        sequence_stmt_activate: $ => seq(kwd("activate"), $.actor, $._newline),
-        sequence_stmt_deactivate: $ => seq(kwd("deactivate"), $.actor, $._newline),
+        sequence_stmt_activate: $ => seq(kwd("activate"), $.sequence_actor, $._newline),
+        sequence_stmt_deactivate: $ => seq(kwd("deactivate"), $.sequence_actor, $._newline),
 
         sequence_stmt_note: $ => seq(
             kwd("note "),
             choice(
-                seq( $.note_placement, $.actor),
-                seq( kwd("over"), $.actor, optional(seq(",", $.actor))),
+                seq( $.sequence_note_placement, $.sequence_actor),
+                seq( kwd("over"), $.sequence_actor, optional(seq(",", $.sequence_actor))),
             ),
-            ":", alias($._rest_text, $.text),
+            ":", $.sequence_text,
             $._newline,
         ),
 
-        sequence_stmt_links: $ => seq( kwd("links"), $.actor, ":", alias($._rest_text, $.text)),
-        sequence_stmt_link: $ => seq( kwd("link"), $.actor, ":", alias($._rest_text, $.text)),
-        sequence_stmt_properties: $ => seq( kwd("properties"), $.actor, ":", alias($._rest_text, $.text)),
-        sequence_stmt_details: $ => seq( kwd("details"), $.actor, ":", alias($._rest_text, $.text)),
+        sequence_stmt_links: $ => seq( kwd("links"), $.sequence_actor, ":", $.sequence_text),
+        sequence_stmt_link: $ => seq( kwd("link"), $.sequence_actor, ":", $.sequence_text),
+        sequence_stmt_properties: $ => seq( kwd("properties"), $.sequence_actor, ":", $.sequence_text),
+        sequence_stmt_details: $ => seq( kwd("details"), $.sequence_actor, ":", $.sequence_text),
 
-        note_placement: $ => choice($.note_placement_left, $.note_placement_right),
+        sequence_note_placement: $ => choice($.note_placement_left, $.note_placement_right),
 
-        sequence_stmt_title: $ => seq(kwd("title"), ":", alias($._rest_text, $.title), $._newline),
+        sequence_stmt_title: $ => seq(kwd("title"), ":", alias($._sequence_rest_text, $.title), $._newline),
 
         sequence_stmt_loop: $ => seq(
-            kwd("loop"), alias($._rest_text, $.text), $._newline,
+            kwd("loop"), $.sequence_text, $._newline,
             optional(alias($._sequence_subdocument, $.sequence_stmt_loop_inner)),
             kwd("end")
         ),
         sequence_stmt_rect: $ => seq(
-            kwd("rect"), alias($._rest_text, $.text), $._newline,
+            kwd("rect"), $.sequence_text, $._newline,
             optional(alias($._sequence_subdocument, $.sequence_stmt_rect_inner)),
             kwd("end")
         ),
         sequence_stmt_opt: $ => seq(
-            kwd("opt"), alias($._rest_text, $.text), $._newline,
+            kwd("opt"), $.sequence_text, $._newline,
             optional(alias($._sequence_subdocument, $.sequence_stmt_opt_inner)),
             kwd("end")
         ),
         _sequence_subdocument: $ => repeat1(choice($._sequence_stmt, $._newline)),
 
         sequence_stmt_alt: $ => seq(
-            kwd("alt"), alias($._rest_text, $.text), $._newline,
+            kwd("alt"), $.sequence_text, $._newline,
             sep(alias($._sequence_subdocument, $.sequence_stmt_alt_branch), kwd("else")),
             kwd("end")
         ),
 
         sequence_stmt_par: $ => seq(
-            kwd("par"), alias($._rest_text, $.text), $._newline,
+            kwd("par"), $.sequence_text, $._newline,
             sep(alias($._sequence_subdocument, $.sequence_stmt_alt_branch), kwd("and")),
             kwd("end")
         ),
@@ -470,13 +458,14 @@ module.exports = grammar({
 
         state_note: $ => seq(
             kwd("note "),
-            $.note_placement,
+            $.state_note_placement,
             $.state_name,
             choice(
                 seq( ":", optional(alias($.state_description, $.note_content))),
                 // seq($._newline, alias(repeat(seq(/[^\n]+/, $._newline)), $.note_content), optional(/\s+/), kwd("end note"))
             ),
         ),
+        state_note_placement: $ => choice($.note_placement_left, $.note_placement_right),
 
         /// Gantt chart
         diagram_gantt: $ => seq(
@@ -735,3 +724,27 @@ module.exports = grammar({
         ... tokensFunc
     }
 });
+
+/// common functions
+function kwd(word) {
+    return alias(reserved(caseInsensitive(word)), word)
+}
+
+function reserved(regex) {
+    return token(prec(1, new RegExp(regex)))
+}
+
+function caseInsensitive(word) {
+    return word.split('')
+        .map(letter => `[${letter}${letter.toUpperCase()}]`)
+        .join('')
+}
+
+function optseq(...args) {
+    return optional(seq(...args))
+}
+
+function sep(rule, delimiter) {
+  return seq(rule, repeat(seq(delimiter, rule)));
+}
+
