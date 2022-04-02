@@ -133,17 +133,25 @@ module.exports = grammar({
     ],
 
     supertypes: $ => [
+        $._direction,
+        $._flowchart_direction,
+
         $._sequence_stmt,
         $._class_stmt,
         $._state_stmt,
-
-        $._class_reltype,
-        $._class_linetype,
         $._gantt_stmt,
         $._pie_stmt,
         $._flow_stmt,
+        $._er_stmt,
+
+        $._class_reltype,
+        $._class_linetype,
+        $._state_annotation,
         $._flow_link,
         $._flow_vertex_kind,
+        $._er_cardinarity,
+        $._er_reltype,
+        $._er_attribute_key_type,
     ],
 
     rules: {

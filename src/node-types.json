@@ -58,6 +58,100 @@
     ]
   },
   {
+    "type": "_direction",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "direction_bt",
+        "named": true
+      },
+      {
+        "type": "direction_lr",
+        "named": true
+      },
+      {
+        "type": "direction_rl",
+        "named": true
+      },
+      {
+        "type": "direction_tb",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_er_attribute_key_type",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "er_attribute_key_type_fk",
+        "named": true
+      },
+      {
+        "type": "er_attribute_key_type_pk",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_er_cardinarity",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "er_cardinarity_one_or_more",
+        "named": true
+      },
+      {
+        "type": "er_cardinarity_only_one",
+        "named": true
+      },
+      {
+        "type": "er_cardinarity_zero_or_more",
+        "named": true
+      },
+      {
+        "type": "er_cardinarity_zero_or_one",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_er_reltype",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "er_reltype_identifying",
+        "named": true
+      },
+      {
+        "type": "er_reltype_non_identifying",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_er_stmt",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "directive",
+        "named": true
+      },
+      {
+        "type": "er_stmt_entity",
+        "named": true
+      },
+      {
+        "type": "er_stmt_entity_block",
+        "named": true
+      },
+      {
+        "type": "er_stmt_entity_relation",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "_flow_link",
     "named": true,
     "subtypes": [
@@ -155,6 +249,28 @@
       },
       {
         "type": "flow_vertex_trapezoid",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_flowchart_direction",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "flowchart_direction_bt",
+        "named": true
+      },
+      {
+        "type": "flowchart_direction_lr",
+        "named": true
+      },
+      {
+        "type": "flowchart_direction_rl",
+        "named": true
+      },
+      {
+        "type": "flowchart_direction_tb",
         "named": true
       }
     ]
@@ -306,23 +422,29 @@
     ]
   },
   {
+    "type": "_state_annotation",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "state_annotation_choice",
+        "named": true
+      },
+      {
+        "type": "state_annotation_fork",
+        "named": true
+      },
+      {
+        "type": "state_annotation_join",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "_state_stmt",
     "named": true,
     "subtypes": [
       {
-        "type": "direction_bt",
-        "named": true
-      },
-      {
-        "type": "direction_lr",
-        "named": true
-      },
-      {
-        "type": "direction_rl",
-        "named": true
-      },
-      {
-        "type": "direction_tb",
+        "type": "_direction",
         "named": true
       },
       {
@@ -613,19 +735,7 @@
       "required": true,
       "types": [
         {
-          "type": "directive",
-          "named": true
-        },
-        {
-          "type": "er_stmt_entity",
-          "named": true
-        },
-        {
-          "type": "er_stmt_entity_block",
-          "named": true
-        },
-        {
-          "type": "er_stmt_entity_relation",
+          "type": "_er_stmt",
           "named": true
         }
       ]
@@ -644,23 +754,11 @@
           "named": true
         },
         {
+          "type": "_flowchart_direction",
+          "named": true
+        },
+        {
           "type": "directive",
-          "named": true
-        },
-        {
-          "type": "flowchart_direction_bt",
-          "named": true
-        },
-        {
-          "type": "flowchart_direction_lr",
-          "named": true
-        },
-        {
-          "type": "flowchart_direction_rl",
-          "named": true
-        },
-        {
-          "type": "flowchart_direction_tb",
           "named": true
         }
       ]
@@ -787,15 +885,11 @@
       "required": true,
       "types": [
         {
+          "type": "_er_attribute_key_type",
+          "named": true
+        },
+        {
           "type": "er_attribute_comment",
-          "named": true
-        },
-        {
-          "type": "er_attribute_key_type_fk",
-          "named": true
-        },
-        {
-          "type": "er_attribute_key_type_pk",
           "named": true
         },
         {
@@ -863,27 +957,11 @@
       "required": true,
       "types": [
         {
-          "type": "er_cardinarity_one_or_more",
+          "type": "_er_cardinarity",
           "named": true
         },
         {
-          "type": "er_cardinarity_only_one",
-          "named": true
-        },
-        {
-          "type": "er_cardinarity_zero_or_more",
-          "named": true
-        },
-        {
-          "type": "er_cardinarity_zero_or_one",
-          "named": true
-        },
-        {
-          "type": "er_reltype_identifying",
-          "named": true
-        },
-        {
-          "type": "er_reltype_non_identifying",
+          "type": "_er_reltype",
           "named": true
         }
       ]
@@ -1072,19 +1150,7 @@
       "required": true,
       "types": [
         {
-          "type": "flowchart_direction_bt",
-          "named": true
-        },
-        {
-          "type": "flowchart_direction_lr",
-          "named": true
-        },
-        {
-          "type": "flowchart_direction_rl",
-          "named": true
-        },
-        {
-          "type": "flowchart_direction_tb",
+          "type": "_flowchart_direction",
           "named": true
         }
       ]
@@ -2378,15 +2444,7 @@
       "required": true,
       "types": [
         {
-          "type": "state_annotation_choice",
-          "named": true
-        },
-        {
-          "type": "state_annotation_fork",
-          "named": true
-        },
-        {
-          "type": "state_annotation_join",
+          "type": "_state_annotation",
           "named": true
         },
         {

@@ -59,8 +59,8 @@
 
 [
  ":"
- (signal_plus_sign)
- (signal_minus_sign)
+ (sequence_signal_plus_sign)
+ (sequence_signal_minus_sign)
 
  (class_visibility_public)
  (class_visibility_private)
@@ -99,7 +99,7 @@
  "&"
  ] @operator
 
-(actor) @field
+(sequence_actor) @field
 (class_name) @field
 
 (state_name) @field
