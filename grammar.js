@@ -208,8 +208,13 @@ module.exports = grammar({
             $.directive,
         ),
 
+        _sequence_participant_type: $ => choice(
+            kwd("participant"),
+            kwd("actor"),
+        ),
+
         sequence_stmt_participant: $ => seq(
-            kwd("participant"), $.sequence_actor, optional(seq(kwd("as"), alias($._sequence_rest_text, $.sequence_alias))),
+            $._sequence_participant_type, $.sequence_actor, optional(seq(kwd("as"), alias($._sequence_rest_text, $.sequence_alias))),
             $._newline,
         ),
         sequence_stmt_actor: $ => seq(kwd("sequence_actor"), $.sequence_actor, optional(seq(kwd("as"), alias($._sequence_rest_text, $.sequence_alias))), $._newline),

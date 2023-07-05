@@ -223,8 +223,8 @@
         }
       ]
     },
-    "sequence_stmt_participant": {
-      "type": "SEQ",
+    "_sequence_participant_type": {
+      "type": "CHOICE",
       "members": [
         {
           "type": "ALIAS",
@@ -241,6 +241,31 @@
           },
           "named": false,
           "value": "participant"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[aA][cC][tT][oO][rR]"
+              }
+            }
+          },
+          "named": false,
+          "value": "actor"
+        }
+      ]
+    },
+    "sequence_stmt_participant": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_sequence_participant_type"
         },
         {
           "type": "SYMBOL",
