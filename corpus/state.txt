@@ -276,7 +276,7 @@ stateDiagram-v2
       (state_arrow)
       (state_name))
     (state_note
-      (note_placement
+      (state_note_placement
         (note_placement_left))
       (state_name)
       (note_content))))

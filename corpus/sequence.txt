@@ -11,23 +11,23 @@ sequenceDiagram
 (source_file
   (diagram_sequence
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_arrow))
-      (actor)
-      (text))
+      (sequence_actor)
+      (sequence_text))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (dotted_arrow))
-      (actor)
-      (text))
+      (sequence_actor)
+      (sequence_text))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_point))
-      (actor)
-      (text))))
+      (sequence_actor)
+      (sequence_text))))
 
 ==========================
 Participant statement
@@ -43,28 +43,28 @@ sequenceDiagram
 (source_file
   (diagram_sequence
     (sequence_stmt_participant
-      (actor))
+      (sequence_actor))
     (sequence_stmt_participant
-      (actor))
+      (sequence_actor))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_arrow))
-      (actor)
-      (text))
+      (sequence_actor)
+      (sequence_text))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_arrow))
-      (actor)
-      (text))))
+      (sequence_actor)
+      (sequence_text))))
 
 ==========================
-Actor statement
+Sequence_Actor statement
 ==========================
 sequenceDiagram
-    actor Alice
-    actor Bob
+    sequence_actor Alice
+    sequence_actor Bob
     Alice->>Bob: Hi Bob
     Bob->>Alice: Hi Alice
 
@@ -73,21 +73,21 @@ sequenceDiagram
 (source_file
   (diagram_sequence
     (sequence_stmt_actor
-      (actor))
+      (sequence_actor))
     (sequence_stmt_actor
-      (actor))
+      (sequence_actor))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_arrow))
-      (actor)
-      (text))
+      (sequence_actor)
+      (sequence_text))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_arrow))
-      (actor)
-      (text))))
+      (sequence_actor)
+      (sequence_text))))
 
 ==========================
 Participant with alias
@@ -103,23 +103,23 @@ sequenceDiagram
 (source_file
   (diagram_sequence
     (sequence_stmt_participant
-      (actor)
-      (alias))
+      (sequence_actor)
+      (sequence_alias))
     (sequence_stmt_participant
-      (actor)
-      (alias))
+      (sequence_actor)
+      (sequence_alias))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_arrow))
-      (actor)
-      (text))
+      (sequence_actor)
+      (sequence_text))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_arrow))
-      (actor)
-      (text))))
+      (sequence_actor)
+      (sequence_text))))
 
 ==========================
 Activation statement
@@ -135,21 +135,21 @@ sequenceDiagram
 (source_file
   (diagram_sequence
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_arrow))
-      (actor)
-      (text))
+      (sequence_actor)
+      (sequence_text))
     (sequence_stmt_activate
-      (actor))
+      (sequence_actor))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (dotted_arrow))
-      (actor)
-      (text))
+      (sequence_actor)
+      (sequence_text))
     (sequence_stmt_deactivate
-      (actor))))
+      (sequence_actor))))
 
 ==================================
 Activation statement with sign
@@ -165,33 +165,33 @@ sequenceDiagram
 (source_file
   (diagram_sequence
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_arrow))
-      (signal_plus_sign)
-      (actor)
-      (text))
+      (sequence_signal_plus_sign)
+      (sequence_actor)
+      (sequence_text))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_arrow))
-      (signal_plus_sign)
-      (actor)
-      (text))
+      (sequence_signal_plus_sign)
+      (sequence_actor)
+      (sequence_text))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (dotted_arrow))
-      (signal_minus_sign)
-      (actor)
-      (text))
+      (sequence_signal_minus_sign)
+      (sequence_actor)
+      (sequence_text))
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (dotted_arrow))
-      (signal_minus_sign)
-      (actor)
-      (text))))
+      (sequence_signal_minus_sign)
+      (sequence_actor)
+      (sequence_text))))
 
 ==================================
 Note statement (left/right of)
@@ -206,12 +206,12 @@ sequenceDiagram
 (source_file
   (diagram_sequence
     (sequence_stmt_participant
-      (actor))
+      (sequence_actor))
     (sequence_stmt_note
-      (note_placement
+      (sequence_note_placement
         (note_placement_right))
-      (actor)
-      (text))))
+      (sequence_actor)
+      (sequence_text))))
 
 ==================================
 Note statement (over)
@@ -225,15 +225,15 @@ sequenceDiagram
 (source_file
   (diagram_sequence
     (sequence_stmt_signal
-      (actor)
-      (signal_type
+      (sequence_actor)
+      (sequence_signal_type
         (solid_open_arrow))
-      (actor)
-      (text))
+      (sequence_actor)
+      (sequence_text))
     (sequence_stmt_note
-      (actor)
-      (actor)
-      (text))))
+      (sequence_actor)
+      (sequence_actor)
+      (sequence_text))))
 
 ==================================
 Case insensitiveness
