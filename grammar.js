@@ -1,8 +1,12 @@
+/* global $, prec, seq, choice, repeat, repeat1, optional, token, field */
+
 const tokens = {
     /// common tokens
     _whitespace: /[ \t]+/,
     _newline: /(\n)+/,
     comment: /%%([^\{].*)?\n/,
+    md_start: /"`/,
+    md_end: /`"/,
 
     type_directive: /[^\}:.][^:.]*/,
     arg_directive: /([^\}:.]|\n)([^:.]|\n)*/,
@@ -115,6 +119,9 @@ const tokens = {
 
     er_attribute_key_type_pk: kwd("pk"),
     er_attribute_key_type_fk: kwd("fk"),
+
+    // tokens in mindmap diagram
+    _mindmap_text: /[^(){}\[\]\n\r]+/,
 }
 
 const tokensFunc = Object.fromEntries(
@@ -165,6 +172,7 @@ module.exports = grammar({
             $.diagram_pie,
             $.diagram_flow,
             $.diagram_er,
+            $.diagram_mindmap,
         ),
 
         directive: $ => seq(
@@ -737,6 +745,52 @@ module.exports = grammar({
         ),
 
         er_attribute_comment: $ => $._er_word,
+
+        // mindmap diagram (mmap)
+        diagram_mindmap: $ => seq(
+            repeat(choice($.directive, $._newline)),
+            seq(reserved("mindmap"), $._newline),
+            // repeat($.mmap_node),
+            sep($.mmap_node, $._newline),
+            optional($._newline),
+        ),
+
+        mmap_node: $ => seq(
+            $._whitespace,
+            $.mmap_node_id,
+            optional(choice(
+                $.mmap_node_square,
+                $.mmap_node_rounded,
+                $.mmap_node_circle,
+                $.mmap_node_cloud,
+                $.mmap_node_bang,
+                $.mmap_node_hexagon,
+            )),
+            optional($.mmap_icon),
+            optional($.mmap_class),
+        ),
+
+        mmap_node_id: $ => $._mindmap_text,
+        mmap_markdown: $ => prec(1, seq(
+            $.md_start,
+            alias(/[^`"]+/, $.md_text),
+            $.md_end
+        )),
+        mmap_text: $ => seq(/[^"][^`]/, $._mindmap_text),
+
+        mmap_node_content: $ => choice($.mmap_markdown, $.mmap_text),
+
+        mmap_node_square: $ => seq("[", $.mmap_node_content, "]"),
+        mmap_node_rounded: $ => seq("(", $.mmap_node_content, ")"),
+        mmap_node_circle: $ => seq("((", $.mmap_node_content, "))"),
+        mmap_node_cloud: $ => seq(")", $.mmap_node_content, "("),
+        mmap_node_bang: $ => seq("))", $.mmap_node_content, "(("),
+        mmap_node_hexagon: $ => seq("{{", $.mmap_node_content, "}}"),
+
+        mmap_class: _ => seq(/\n?\s*:::/, /[_a-zA-Z0-9- ]+/),
+        // experimental icon https://mermaid.js.org/syntax/mindmap.html#icons
+        mmap_icon: _ => seq(/\n?\s*::icon\(/, /[^)\n\r]+/, ")"),
+
 
         ... tokensFunc
     }
