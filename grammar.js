@@ -288,7 +288,11 @@ module.exports = grammar({
 
         sequence_stmt_par: $ => seq(
             kwd("par"), optional($.sequence_text), $._newline,
-            sep(alias($._sequence_subdocument, $.sequence_stmt_alt_branch), seq(kwd("and"), optional($.sequence_text))),
+            alias($._sequence_subdocument, $.sequence_stmt_alt_branch),
+            repeat(seq(
+              kwd("and"), optional($.sequence_text), $._newline,
+              alias($._sequence_subdocument, $.sequence_stmt_alt_branch)
+            )),
             kwd("end")
         ),
 
