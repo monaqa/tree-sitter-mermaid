@@ -13,6 +13,7 @@ There may be unsupported grammars for some types, even if they are marked as com
 - [x] Pie
 - [x] Sequence
 - [x] State
+- [x] Mindmap
 - [ ] Requirement
 - [ ] User-Journey
 - [ ] Git
