@@ -8,8 +8,7 @@ const tokens = {
     md_start: /"`/,
     md_end: /`"/,
 
-    type_directive: /[^\}:.][^:.]*/,
-    arg_directive: /([^\}:.]|\n)([^:.]|\n)*/,
+    type_directive: /[^%}:]*/,
 
     /// tokens in
     direction_tb: kwd("direction tb"),
@@ -164,22 +163,25 @@ module.exports = grammar({
     rules: {
 
         /// source file, common
-        source_file: $ => choice(
-            $.diagram_sequence,
-            $.diagram_class,
-            $.diagram_state,
-            $.diagram_gantt,
-            $.diagram_pie,
-            $.diagram_flow,
-            $.diagram_er,
-            $.diagram_mindmap,
-        ),
+        source_file: $ => seq(
+            repeat(choice($.directive, $._newline)),
+            choice(
+                $.diagram_sequence,
+                $.diagram_class,
+                $.diagram_state,
+                $.diagram_gantt,
+                $.diagram_pie,
+                $.diagram_flow,
+                $.diagram_er,
+                $.diagram_mindmap,
+        )),
 
         directive: $ => seq(
             "%%{",
-            $.type_directive,
-            optseq(":", $.arg_directive),
-            "}%%"
+            prec.left(1, seq(
+                $.type_directive,
+                alias(/[^%]*\}%%/, $.arg_directive),
+            ))
         ),
 
         _direction: $ => choice(
@@ -191,7 +193,6 @@ module.exports = grammar({
 
         /// sequence diagram
         diagram_sequence: $ => seq(
-            repeat(choice($.directive, $._newline)),
             kwd("sequenceDiagram"), repeat(choice($._sequence_stmt, $._newline))
         ),
 
@@ -213,7 +214,6 @@ module.exports = grammar({
             $.sequence_stmt_opt,
             $.sequence_stmt_alt,
             $.sequence_stmt_par,
-            $.directive,
         ),
 
         _sequence_participant_type: $ => choice(
@@ -307,7 +307,6 @@ module.exports = grammar({
 
         /// class diagram
         diagram_class: $ => seq(
-            repeat(choice($.directive, $._newline)),
             choice(
                 kwd("classDiagram-v2"),
                 kwd("classDiagram"),
@@ -410,7 +409,6 @@ module.exports = grammar({
 
         /// state diagram
         diagram_state: $ => seq(
-            repeat(choice($.directive, $._newline)),
             choice(kwd("stateDiagram"), kwd("stateDiagram-v2")),
             optional($._newline),
             sep($._state_stmt, $._newline),
@@ -494,7 +492,6 @@ module.exports = grammar({
 
         /// Gantt chart
         diagram_gantt: $ => seq(
-            repeat(choice($.directive, $._newline)),
             kwd("gantt"), $._newline,
             repeat(choice($._gantt_stmt, $._newline))
         ),
@@ -511,7 +508,6 @@ module.exports = grammar({
             $.gantt_stmt_section,
             $.gantt_stmt_task,
             // $.gantt_stmt_click,
-            $.directive,
         ),
 
         gantt_stmt_dateformat: $ => seq(
@@ -548,7 +544,6 @@ module.exports = grammar({
 
         /// pie chart
         diagram_pie: $ => seq(
-            repeat(choice($.directive, $._newline)),
             kwd("pie"),
             optional($.pie_showdata),
             repeat(choice($._pie_stmt, $._newline))
@@ -557,7 +552,6 @@ module.exports = grammar({
         _pie_stmt: $ => choice(
             $.pie_stmt_title,
             $.pie_stmt_element,
-            $.directive,
         ),
 
         pie_stmt_title: $ => seq(
@@ -573,7 +567,6 @@ module.exports = grammar({
 
         /// flow chart
         diagram_flow: $ => seq(
-            repeat(choice($.directive, $._newline)),
             kwd("flowchart"),
             choice(
                 $._flowchart_direction,
@@ -678,7 +671,6 @@ module.exports = grammar({
 
         /// ER diagram
         diagram_er: $ => seq(
-            repeat(choice($.directive, $._newline)),
             kwd("erdiagram"),
             optional($._newline),
             sep($._er_stmt, $._newline),
@@ -689,7 +681,6 @@ module.exports = grammar({
             $.er_stmt_entity,
             $.er_stmt_entity_relation,
             $.er_stmt_entity_block,
-            $.directive,
         ),
 
         er_stmt_entity: $ => $.er_entity_name,
@@ -748,8 +739,8 @@ module.exports = grammar({
 
         // mindmap diagram (mmap)
         diagram_mindmap: $ => seq(
-            repeat(choice($.directive, $._newline)),
-            seq(reserved("mindmap"), $._newline),
+            reserved("mindmap"),
+            $._newline,
             // repeat($.mmap_node),
             sep($.mmap_node, $._newline),
             optional($._newline),

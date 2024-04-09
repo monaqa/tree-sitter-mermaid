@@ -1,15 +1,21 @@
 ==========================
-Simple mindmap diagram
+Simple mindmap diagram with init directive
 ==========================
+
+%%{'init': {theme: 'forest'}}%%
 mindmap
     Root
         A
             B
+            %% this is a comment
             C
 
 ---
 
 (source_file
+  (directive
+    (type_directive)
+    (arg_directive))
   (diagram_mindmap
     (mmap_node
       (mmap_node_id))
@@ -18,6 +24,7 @@ mindmap
     (mmap_node
       (mmap_node_id))
     (mmap_node
+      (comment)
       (mmap_node_id))))
 
 ==========================
