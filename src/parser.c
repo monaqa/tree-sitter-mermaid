@@ -120,8 +120,8 @@ enum ts_symbol_identifiers {
   sym__whitespace = 94,
   sym__newline = 95,
   sym_comment = 96,
-  sym_md_start = 97,
-  sym_md_end = 98,
+  sym__md_start = 97,
+  sym__md_end = 98,
   sym_type_directive = 99,
   aux_sym_direction_tb_token1 = 100,
   aux_sym_direction_bt_token1 = 101,
@@ -515,8 +515,8 @@ static const char * const ts_symbol_names[] = {
   [sym__whitespace] = "_whitespace",
   [sym__newline] = "_newline",
   [sym_comment] = "comment",
-  [sym_md_start] = "md_start",
-  [sym_md_end] = "md_end",
+  [sym__md_start] = "_md_start",
+  [sym__md_end] = "_md_end",
   [sym_type_directive] = "type_directive",
   [aux_sym_direction_tb_token1] = "direction tb",
   [aux_sym_direction_bt_token1] = "direction bt",
@@ -910,8 +910,8 @@ static const TSSymbol ts_symbol_map[] = {
   [sym__whitespace] = sym__whitespace,
   [sym__newline] = sym__newline,
   [sym_comment] = sym_comment,
-  [sym_md_start] = sym_md_start,
-  [sym_md_end] = sym_md_end,
+  [sym__md_start] = sym__md_start,
+  [sym__md_end] = sym__md_end,
   [sym_type_directive] = sym_type_directive,
   [aux_sym_direction_tb_token1] = aux_sym_direction_tb_token1,
   [aux_sym_direction_bt_token1] = aux_sym_direction_bt_token1,
@@ -1596,12 +1596,12 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
-  [sym_md_start] = {
-    .visible = true,
+  [sym__md_start] = {
+    .visible = false,
     .named = true,
   },
-  [sym_md_end] = {
-    .visible = true,
+  [sym__md_end] = {
+    .visible = false,
     .named = true,
   },
   [sym_type_directive] = {
@@ -7008,10 +7008,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead != 0) ADVANCE(10);
       END_STATE();
     case 586:
-      ACCEPT_TOKEN(sym_md_start);
+      ACCEPT_TOKEN(sym__md_start);
       END_STATE();
     case 587:
-      ACCEPT_TOKEN(sym_md_end);
+      ACCEPT_TOKEN(sym__md_end);
       END_STATE();
     case 588:
       ACCEPT_TOKEN(sym_type_directive);
@@ -11459,8 +11459,8 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym__whitespace] = ACTIONS(3),
     [sym__newline] = ACTIONS(1),
     [sym_comment] = ACTIONS(5),
-    [sym_md_start] = ACTIONS(1),
-    [sym_md_end] = ACTIONS(1),
+    [sym__md_start] = ACTIONS(1),
+    [sym__md_end] = ACTIONS(1),
     [aux_sym_direction_tb_token1] = ACTIONS(1),
     [aux_sym_direction_bt_token1] = ACTIONS(1),
     [aux_sym_direction_rl_token1] = ACTIONS(1),
@@ -23873,7 +23873,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(1474), 1,
       aux_sym_mmap_text_token1,
     ACTIONS(1476), 1,
-      sym_md_start,
+      sym__md_start,
     STATE(912), 1,
       sym_mmap_node_content,
     STATE(464), 2,
@@ -24090,7 +24090,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(1514), 1,
       aux_sym_mmap_text_token1,
     ACTIONS(1516), 1,
-      sym_md_start,
+      sym__md_start,
     STATE(913), 1,
       sym_mmap_node_content,
     STATE(728), 2,
@@ -24114,7 +24114,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(1514), 1,
       aux_sym_mmap_text_token1,
     ACTIONS(1516), 1,
-      sym_md_start,
+      sym__md_start,
     STATE(914), 1,
       sym_mmap_node_content,
     STATE(728), 2,
@@ -24128,7 +24128,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(1474), 1,
       aux_sym_mmap_text_token1,
     ACTIONS(1476), 1,
-      sym_md_start,
+      sym__md_start,
     STATE(916), 1,
       sym_mmap_node_content,
     STATE(464), 2,
@@ -24142,7 +24142,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(1474), 1,
       aux_sym_mmap_text_token1,
     ACTIONS(1476), 1,
-      sym_md_start,
+      sym__md_start,
     STATE(919), 1,
       sym_mmap_node_content,
     STATE(464), 2,
@@ -24156,7 +24156,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(1474), 1,
       aux_sym_mmap_text_token1,
     ACTIONS(1476), 1,
-      sym_md_start,
+      sym__md_start,
     STATE(845), 1,
       sym_mmap_node_content,
     STATE(464), 2,
@@ -27788,7 +27788,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_comment,
   [21273] = 2,
     ACTIONS(2126), 1,
-      sym_md_end,
+      sym__md_end,
     ACTIONS(5), 2,
       sym__whitespace,
       sym_comment,
@@ -28194,7 +28194,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_comment,
   [21817] = 2,
     ACTIONS(2256), 1,
-      sym_md_end,
+      sym__md_end,
     ACTIONS(5), 2,
       sym__whitespace,
       sym_comment,

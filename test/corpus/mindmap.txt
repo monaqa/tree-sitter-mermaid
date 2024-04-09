@@ -94,17 +94,13 @@ text`"]
       (mmap_node_rounded
         (mmap_node_content
           (mmap_markdown
-            (md_start)
-            (md_text)
-            (md_end)))))
+            (md_text)))))
     (mmap_node
       (mmap_node_id)
       (mmap_node_square
         (mmap_node_content
           (mmap_markdown
-            (md_start)
-            (md_text)
-            (md_end)))))
+            (md_text)))))
     (mmap_node
       (mmap_node_id))))
 

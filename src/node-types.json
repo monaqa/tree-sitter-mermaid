@@ -1758,17 +1758,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "md_end",
-          "named": true
-        },
-        {
-          "type": "md_start",
-          "named": true
-        },
         {
           "type": "md_text",
           "named": true
@@ -3112,14 +3104,6 @@
   {
     "type": "lr",
     "named": false
-  },
-  {
-    "type": "md_end",
-    "named": true
-  },
-  {
-    "type": "md_start",
-    "named": true
   },
   {
     "type": "md_text",

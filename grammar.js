@@ -5,8 +5,8 @@ const tokens = {
     _whitespace: /[ \t]+/,
     _newline: /(\n)+/,
     comment: /%%([^\{].*)?\n/,
-    md_start: /"`/,
-    md_end: /`"/,
+    _md_start: /"`/,
+    _md_end: /`"/,
 
     type_directive: /[^%}:]*/,
 
@@ -178,10 +178,8 @@ module.exports = grammar({
 
         directive: $ => seq(
             "%%{",
-            prec.left(1, seq(
-                $.type_directive,
-                alias(/[^%]*\}%%/, $.arg_directive),
-            ))
+            $.type_directive,
+            alias(/[^%]*\}%%/, $.arg_directive),
         ),
 
         _direction: $ => choice(
@@ -763,9 +761,9 @@ module.exports = grammar({
 
         mmap_node_id: $ => $._mindmap_text,
         mmap_markdown: $ => prec(1, seq(
-            $.md_start,
+            $._md_start,
             alias(/[^`"]+/, $.md_text),
-            $.md_end
+            $._md_end
         )),
         mmap_text: $ => seq(/[^"][^`]/, $._mindmap_text),
 

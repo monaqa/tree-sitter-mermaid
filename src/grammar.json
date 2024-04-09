@@ -67,26 +67,17 @@
           "value": "%%{"
         },
         {
-          "type": "PREC_LEFT",
-          "value": 1,
+          "type": "SYMBOL",
+          "name": "type_directive"
+        },
+        {
+          "type": "ALIAS",
           "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "type_directive"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "[^%]*\\}%%"
-                },
-                "named": true,
-                "value": "arg_directive"
-              }
-            ]
-          }
+            "type": "PATTERN",
+            "value": "[^%]*\\}%%"
+          },
+          "named": true,
+          "value": "arg_directive"
         }
       ]
     },
@@ -4051,7 +4042,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "md_start"
+            "name": "_md_start"
           },
           {
             "type": "ALIAS",
@@ -4064,7 +4055,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "md_end"
+            "name": "_md_end"
           }
         ]
       }
@@ -4239,11 +4230,11 @@
       "type": "PATTERN",
       "value": "%%([^\\{].*)?\\n"
     },
-    "md_start": {
+    "_md_start": {
       "type": "PATTERN",
       "value": "\"`"
     },
-    "md_end": {
+    "_md_end": {
       "type": "PATTERN",
       "value": "`\""
     },
