@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-mermaid",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Tree-sitter grammar for mermaid.js",
   "main": "bindings/node",
   "scripts": {
