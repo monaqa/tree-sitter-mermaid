@@ -134,10 +134,6 @@
     "named": true,
     "subtypes": [
       {
-        "type": "directive",
-        "named": true
-      },
-      {
         "type": "er_stmt_entity",
         "named": true
       },
@@ -280,10 +276,6 @@
     "named": true,
     "subtypes": [
       {
-        "type": "directive",
-        "named": true
-      },
-      {
         "type": "gantt_stmt_axisformat",
         "named": true
       },
@@ -330,10 +322,6 @@
     "named": true,
     "subtypes": [
       {
-        "type": "directive",
-        "named": true
-      },
-      {
         "type": "pie_stmt_element",
         "named": true
       },
@@ -347,10 +335,6 @@
     "type": "_sequence_stmt",
     "named": true,
     "subtypes": [
-      {
-        "type": "directive",
-        "named": true
-      },
       {
         "type": "sequence_stmt_activate",
         "named": true
@@ -718,10 +702,6 @@
         {
           "type": "_class_stmt",
           "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
         }
       ]
     }
@@ -756,10 +736,6 @@
         {
           "type": "_flowchart_direction",
           "named": true
-        },
-        {
-          "type": "directive",
-          "named": true
         }
       ]
     }
@@ -787,10 +763,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "directive",
-          "named": true
-        },
         {
           "type": "mmap_node",
           "named": true
@@ -842,10 +814,6 @@
       "types": [
         {
           "type": "_state_stmt",
-          "named": true
-        },
-        {
-          "type": "directive",
           "named": true
         }
       ]
@@ -1790,17 +1758,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "md_end",
-          "named": true
-        },
-        {
-          "type": "md_start",
-          "named": true
-        },
         {
           "type": "md_text",
           "named": true
@@ -2503,7 +2463,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -2536,6 +2496,10 @@
         },
         {
           "type": "diagram_state",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         }
       ]
@@ -3142,14 +3106,6 @@
     "named": false
   },
   {
-    "type": "md_end",
-    "named": true
-  },
-  {
-    "type": "md_start",
-    "named": true
-  },
-  {
     "type": "md_text",
     "named": true
   },
@@ -3319,10 +3275,6 @@
   },
   {
     "type": "}",
-    "named": false
-  },
-  {
-    "type": "}%%",
     "named": false
   },
   {

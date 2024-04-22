@@ -5,7 +5,9 @@
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tree-sitter build --output ./build/mermaid.so",
+    "test": "tree-sitter test",
+    "generate": "tree-sitter generate",
     "install": "node-gyp-build",
     "prebuildify": "prebuildify --napi --strip"
   },
