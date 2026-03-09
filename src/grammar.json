@@ -1,9 +1,22 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "mermaid",
   "rules": {
     "source_file": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_config"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "REPEAT",
           "content": {
@@ -56,6 +69,103 @@
               "name": "diagram_mindmap"
             }
           ]
+        }
+      ]
+    },
+    "config": {
+      "type": "TOKEN",
+      "content": {
+        "type": "REPEAT",
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[^-\\n][^\\n]*"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "-[^-\\n][^\\n]*"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "--[^-\\n][^\\n]*"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "\n"
+            }
+          ]
+        }
+      }
+    },
+    "_config": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "---"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "\r"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "STRING",
+                "value": "\n"
+              }
+            ]
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "config"
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "---"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "\r"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "STRING",
+                "value": "\n"
+              }
+            ]
+          }
         }
       ]
     },
@@ -5061,5 +5171,6 @@
     "_er_cardinarity",
     "_er_reltype",
     "_er_attribute_key_type"
-  ]
+  ],
+  "reserved": {}
 }

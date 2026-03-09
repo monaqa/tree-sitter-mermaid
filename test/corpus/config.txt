@@ -1,0 +1,25 @@
+===============================================================================
+YAML configuration (and minimal flowchart)
+===============================================================================
+---
+title: A trivial flowchart, but this config section contains the juice here
+displayMode: compact
+config:
+  theme: forest
+  flowchart:
+    defaultRenderer: "elk"
+---
+
+flowchart LR
+    id
+
+-------------------------------------------------------------------------------
+
+(source_file
+  (config)
+  (diagram_flow
+    (flowchart_direction_lr)
+    (flow_stmt_vertice
+      (flow_node
+        (flow_vertex
+          (flow_vertex_id))))))

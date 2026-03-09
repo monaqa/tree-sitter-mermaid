@@ -2461,11 +2461,16 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "config",
+          "named": true
+        },
         {
           "type": "diagram_class",
           "named": true
@@ -2987,6 +2992,11 @@
   },
   {
     "type": "comment",
+    "named": true,
+    "extra": true
+  },
+  {
+    "type": "config",
     "named": true
   },
   {

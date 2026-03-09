@@ -164,6 +164,7 @@ module.exports = grammar({
 
         /// source file, common
         source_file: $ => seq(
+            optional($._config),
             repeat(choice($.directive, $._newline)),
             choice(
                 $.diagram_sequence,
@@ -175,6 +176,21 @@ module.exports = grammar({
                 $.diagram_er,
                 $.diagram_mindmap,
         )),
+
+        config: _ => token(repeat(seq(
+            choice(
+                /[^-\n][^\n]*/,
+                /-[^-\n][^\n]*/,
+                /--[^-\n][^\n]*/,
+            ),
+            "\n"
+        ))),
+
+        _config: $ => seq(
+            token(seq("---", optional("\r"), "\n")),
+            $.config,
+            token(seq("---", optional("\r"), "\n")),
+        ),
 
         directive: $ => seq(
             "%%{",
