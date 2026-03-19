@@ -164,6 +164,7 @@ module.exports = grammar({
 
         /// source file, common
         source_file: $ => seq(
+            optional($._config),
             repeat(choice($.directive, $._newline)),
             choice(
                 $.diagram_sequence,
@@ -174,7 +175,23 @@ module.exports = grammar({
                 $.diagram_flow,
                 $.diagram_er,
                 $.diagram_mindmap,
+                $.diagram_packet,
         )),
+
+        config: _ => token(repeat(seq(
+            choice(
+                /[^-\n][^\n]*/,
+                /-[^-\n][^\n]*/,
+                /--[^-\n][^\n]*/,
+            ),
+            "\n"
+        ))),
+
+        _config: $ => seq(
+            token(seq("---", optional("\r"), "\n")),
+            $.config,
+            token(seq("---", optional("\r"), "\n")),
+        ),
 
         directive: $ => seq(
             "%%{",
@@ -779,6 +796,31 @@ module.exports = grammar({
         mmap_class: _ => seq(/\n?\s*:::/, /[_a-zA-Z0-9- ]+/),
         // experimental icon https://mermaid.js.org/syntax/mindmap.html#icons
         mmap_icon: _ => seq(/\n?\s*::icon\(/, /[^)\n\r]+/, ")"),
+
+        // packet diagram
+        diagram_packet: $ => seq(
+            kwd("packet"),
+            repeat(seq(optional($._newline), $.packet_field)),
+            // repeated $._newline allows comments with empty lines in between
+            // to follow
+            repeat($._newline)
+        ),
+
+        packet_field: $ => seq(
+            $.packet_field_bits,
+            ':',
+            '"',
+            $.packet_field_label,
+            '"',
+        ),
+
+        packet_field_bits: _ => seq(
+            optional('+'),
+            /[0-9]+/,
+            optional(seq('-', /[0-9]+/)),
+        ),
+
+        packet_field_label: _ => /[^\n\r"]*/,
 
 
         ... tokensFunc

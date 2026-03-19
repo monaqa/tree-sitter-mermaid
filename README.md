@@ -14,6 +14,7 @@ There may be unsupported grammars for some types, even if they are marked as com
 - [x] Sequence
 - [x] State
 - [x] Mindmap
+- [x] Packet
 - [ ] Requirement
 - [ ] User-Journey
 - [ ] Git

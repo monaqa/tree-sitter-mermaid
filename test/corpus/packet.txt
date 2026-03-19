@@ -1,0 +1,45 @@
+===============================================================================
+Packet Diagram with YAML config
+===============================================================================
+---
+title: "CoAP Option Header"
+config:
+  packet:
+    bitsPerRow: 8
+---
+packet
+0-3: "Option Delta"
++4: "Option Length"
++8: "Ext. Option Delta (if Option Delta == 13)"
++8: "Ext. Option Delta (if Option Delta == 14)"
++8: "Ext. Option Length (if Option Length == 13)"
++8: "Ext. Option Length (if Option Length == 14)"
++32: "Option Value" %% lengths depends on value decoded from Option Length and Option Length (extended)
+
+-------------------------------------------------------------------------------
+
+(source_file
+  (config)
+  (diagram_packet
+    (packet_field
+      (packet_field_bits)
+      (packet_field_label))
+    (packet_field
+      (packet_field_bits)
+      (packet_field_label))
+    (packet_field
+      (packet_field_bits)
+      (packet_field_label))
+    (packet_field
+      (packet_field_bits)
+      (packet_field_label))
+    (packet_field
+      (packet_field_bits)
+      (packet_field_label))
+    (packet_field
+      (packet_field_bits)
+      (packet_field_label))
+    (packet_field
+      (packet_field_bits)
+      (packet_field_label)))
+  (comment))

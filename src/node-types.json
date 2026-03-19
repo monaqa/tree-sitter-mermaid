@@ -771,6 +771,21 @@
     }
   },
   {
+    "type": "diagram_packet",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "packet_field",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "diagram_pie",
     "named": true,
     "fields": {},
@@ -1950,6 +1965,30 @@
     "fields": {}
   },
   {
+    "type": "packet_field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "packet_field_bits",
+          "named": true
+        },
+        {
+          "type": "packet_field_label",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "packet_field_bits",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "pie_label",
     "named": true,
     "fields": {}
@@ -2461,11 +2500,16 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "config",
+          "named": true
+        },
         {
           "type": "diagram_class",
           "named": true
@@ -2484,6 +2528,10 @@
         },
         {
           "type": "diagram_mindmap",
+          "named": true
+        },
+        {
+          "type": "diagram_packet",
           "named": true
         },
         {
@@ -2732,6 +2780,10 @@
     "type": "title",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "\"",
+    "named": false
   },
   {
     "type": "%%{",
@@ -2987,6 +3039,11 @@
   },
   {
     "type": "comment",
+    "named": true,
+    "extra": true
+  },
+  {
+    "type": "config",
     "named": true
   },
   {
@@ -3128,6 +3185,14 @@
   {
     "type": "o|",
     "named": false
+  },
+  {
+    "type": "packet",
+    "named": false
+  },
+  {
+    "type": "packet_field_label",
+    "named": true
   },
   {
     "type": "par",
